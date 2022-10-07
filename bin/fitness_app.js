@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const cdk = require('aws-cdk-lib');
-const { FitnessAppStack } = require('../lib/fitness_app-stack');
+const { FitnessAppStack } = require('../lib/infra/fitness_app-stack');
 
 const app = new cdk.App();
 new FitnessAppStack(app, 'FitnessAppStack', {
