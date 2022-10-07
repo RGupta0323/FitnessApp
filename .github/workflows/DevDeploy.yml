@@ -34,3 +34,8 @@ jobs:
 
       - name: Cdk synth
         run: yarn cdk synth
+
+      - name: cdk bootstrap 
+        run: yarn cdk bootstrap aws://783978466054/us-east-1
+
+      
