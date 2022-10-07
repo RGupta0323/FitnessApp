@@ -33,9 +33,12 @@ jobs:
         run: yarn 
 
       - name: Cdk synth
-        run: yarn cdk synth
+        run: yarn cdk synth FitnessApp-Test-Stack
 
       - name: cdk bootstrap 
         run: yarn cdk bootstrap aws://783978466054/us-east-1
+
+      - name: Deploy stack
+        run: yarn cdk deploy FitnessApp-Test-Stack --all --require-approval never
 
       
