@@ -39,7 +39,7 @@ jobs:
       - name: cdk bootstrap 
         run: yarn cdk bootstrap aws://783978466054/us-east-1
 
-      - name: Deploy stack
-        run: yarn cdk deploy FitnessApp-Dev-Stack --require-approval never
+      - name: Destroy stack
+        run: yarn cdk destroy FitnessApp-Dev-Stack --force
 
       
