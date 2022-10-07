@@ -20,7 +20,7 @@ jobs:
           node-version: "16.3.0"
 
       - name: install aws cdk 
-        run: np install -g aws-cdk 
+        run: npm install -g aws-cdk 
 
       - name: Configure aws credentials
         uses: aws-actions/configure-aws-credentials@master
