@@ -6,7 +6,7 @@ on:
 
 jobs: 
   build: 
-    environment: Test
+    environment: Dev
     env: 
       CDK_DEFAULT_REGION: ${{secrets.AWS_REGION}}
 
