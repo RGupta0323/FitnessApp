@@ -31,7 +31,7 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Install dependencies
-        run: yarn
+        run: yarn install
 
       - name: Cdk synth
         run: yarn cdk synth FitnessApp-Dev-Stack
