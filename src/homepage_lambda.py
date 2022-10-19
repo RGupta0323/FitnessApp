@@ -1,2 +1,12 @@
+# Displays home page
 def handler(event, context):
-    pass
+    return {
+            'statusCode': 200,
+            'headers': {
+                "Access-Control-Allow-Origin": "*",
+            },
+            'body': "This text is coming from Lambda!"
+    }
+
+
+
