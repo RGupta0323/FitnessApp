@@ -22,4 +22,16 @@ jobs:
           python-version: 3.7
 
       - name: Install python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Install python dev dependencies
         run: pip install -r requirements-dev.txt
+
+      - name: Install python infrastructure dependencies
+        run: pip install -r requirements-infra.txt
+
+      - name: cdk synth
+        run: cdk synth fitness-app-dev-stack
+
+      - name: cdk deploy
+        run: cdk deploy fitness-app-dev-stack --require-approval never
