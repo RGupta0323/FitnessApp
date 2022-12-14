@@ -7,7 +7,7 @@ from aws_cdk import (
     aws_sns as sns,
     aws_sns_subscriptions as subs,
     aws_lambda as _lambda,
-    aws_apigatewayv2 as apigateway
+    aws_apigateway as apigateway
 )
 
 
@@ -20,8 +20,4 @@ class FitnessAppStack(Stack):
                                    runtime=_lambda.Runtime.PYTHON_3_7,
                                    code=_lambda.Code.from_asset("src"),
                                    handler="homepage_lambda.handler")
-
-        api = apigateway.LambdaRestApi(self, "Figit tnessApp-API-Gateway",
-                                       handler=home_lambda,
-                                       proxy=False
-                                       )
+        api = apigateway.LambdaRestApi()
