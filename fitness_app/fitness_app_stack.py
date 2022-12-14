@@ -20,4 +20,4 @@ class FitnessAppStack(Stack):
                                    runtime=_lambda.Runtime.PYTHON_3_7,
                                    code=_lambda.Code.from_asset("src"),
                                    handler="homepage_lambda.handler")
-        api = apigateway.LambdaRestApi()
+        # api = apigateway.LambdaRestApi()
