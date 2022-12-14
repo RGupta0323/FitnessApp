@@ -27,19 +27,5 @@ class FitnessAppStack(Stack):
                                        deploy_options=None
                                        )
         deployment = apigateway.Deployment(self, "Deployment", api=api)
-        apigateway.Stage(self, "dev",
-                         deployment=deployment,
-                         access_log_destination=apigateway.LogGroupLogDestination(dev_log_group),
-                         access_log_format=apigateway.AccessLogFormat.json_with_standard_fields(
-                             caller=False,
-                             http_method=True,
-                             ip=True,
-                             protocol=True,
-                             request_time=True,
-                             resource_path=True,
-                             response_length=True,
-                             status=True,
-                             user=True
-                         )
-                         )
+
 
