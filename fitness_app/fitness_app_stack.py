@@ -22,10 +22,10 @@ class FitnessAppStack(Stack):
                                    code=_lambda.Code.from_asset("src"),
                                    handler="homepage_lambda.handler")
 
-        dev_log_group = logs.LogGroup(self, "DevLogs")
+
         api = apigateway.LambdaRestApi(self, "FitnessAppAPIGateway", handler=home_lambda,
                                        deploy_options=None
                                        )
-        deployment = apigateway.Deployment(self, "Deployment", api=api)
+
 
 
