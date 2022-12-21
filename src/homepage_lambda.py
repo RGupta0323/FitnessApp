@@ -1,10 +1,11 @@
 # Displays home page
 import os
+import sys
+from jinja2 import Environment, FileSystemLoader
 def handler(event, context):
-    print(os.getcwd())
-    f = open("web/index.html", "r")
-    html = f.readlines()
-    f.close()
+    env = Environment(loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), "web"), encoding="utf8"))
+    template = env.get_template("index.html")
+    html = template.render()
     return {
             'statusCode': 200,
             'headers': {
