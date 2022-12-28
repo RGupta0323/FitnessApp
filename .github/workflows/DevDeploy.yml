@@ -22,13 +22,13 @@ jobs:
           python-version: 3.7
 
       - name: Install python dependencies
-        run: pip install --target ./src -r requirements.txt
+        run: pip install -r requirements.txt
 
       - name: Install python dev dependencies
         run: pip install --target ./src -r requirements-dev.txt
 
       - name: Install python infrastructure dependencies
-        run: pip install --target ./src -r requirements-infra.txt
+        run: pip install -r requirements-infra.txt
 
       - name: Setup node
         uses: actions/setup-node@v1
