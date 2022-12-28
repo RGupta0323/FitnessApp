@@ -25,10 +25,10 @@ jobs:
         run: pip install --target ./src -r requirements.txt
 
       - name: Install python dev dependencies
-        run: pip install -r requirements-dev.txt
+        run: pip install --target ./src -r requirements-dev.txt
 
       - name: Install python infrastructure dependencies
-        run: pip install -r requirements-infra.txt
+        run: pip install --target ./src -r requirements-infra.txt
 
       - name: Setup node
         uses: actions/setup-node@v1
