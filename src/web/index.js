@@ -1,4 +1,4 @@
- function getLambdaAPI(){
+ export function getLambdaAPI(){
                 var xhttplib = require('xhr2');
                 var xhttp = new XMLHttpRequest();
 
