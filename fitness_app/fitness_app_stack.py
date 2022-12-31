@@ -22,6 +22,10 @@ class FitnessAppStack(Stack):
                                    code=_lambda.Code.from_asset("src"),
                                    handler="homepage_lambda.handler")
 
+        register_lambda = _lambda.Function(self, id="RegisterLambda", runtime=_lambda.Runtime.PYTHON_3_7,
+                                           code=_lambda.Code.from_asset("src"),
+                                           handler="register_lambda.handler")
+
 
         api = apigateway.LambdaRestApi(self, "FitnessAppAPIGateway", handler=home_lambda,
                                        deploy_options=None
