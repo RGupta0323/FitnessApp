@@ -8,7 +8,7 @@ from aws_cdk import (
     aws_sns_subscriptions as subs,
     aws_lambda as _lambda,
     aws_apigateway as apigateway,
-    aws_logs as logs
+    aws_s3 as s3
 )
 
 
@@ -33,6 +33,10 @@ class FitnessAppStack(Stack):
 
         register_endpoint = api.root.add_resource("register") # adding endpiont in api gateway for register
         register_endpoint.add_method("GET", apigateway.LambdaIntegration(register_lambda))
+
+        # creating s3 bucket for static web pages
+        web_files_bucket = s3.Bucket(self, "FitnessAppStaticWebFiles", encryption=s3.BucketEncryption.KMS_MANAGED,
+                                     enforce_ssl=True)
 
 
 
