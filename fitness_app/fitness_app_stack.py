@@ -27,12 +27,12 @@ class FitnessAppStack(Stack):
                                            handler="register_lambda.handler")
 
 
-        api = apigateway.LambdaRestApi(self, "FitnessAppAPIGateway", handler=register_lambda,
+        api = apigateway.LambdaRestApi(self, "FitnessAppAPIGateway", handler=home_lambda,
                                        deploy_options=None
                                        )
 
         register_endpoint = api.root.add_resource("register") # adding endpiont in api gateway for register
-        register_endpoint.add_method("GET")
+        register_endpoint.add_method("GET", apigateway.LambdaIntegration(register_lambda))
 
 
 
