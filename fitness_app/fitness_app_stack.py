@@ -31,5 +31,7 @@ class FitnessAppStack(Stack):
                                        deploy_options=None
                                        )
 
+        register_endpoint = api.root.add_resource("register") # adding endpiont in api gateway for register
+
 
 
