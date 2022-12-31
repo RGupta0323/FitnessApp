@@ -32,6 +32,7 @@ class FitnessAppStack(Stack):
                                        )
 
         register_endpoint = api.root.add_resource("register") # adding endpiont in api gateway for register
+        register_endpoint.add_method("GET")
 
 
 
