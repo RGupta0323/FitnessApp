@@ -27,7 +27,7 @@ class FitnessAppStack(Stack):
                                            handler="register_lambda.handler")
 
 
-        api = apigateway.LambdaRestApi(self, "FitnessAppAPIGateway", handler=home_lambda,
+        api = apigateway.LambdaRestApi(self, "FitnessAppAPIGateway", handler=register_lambda,
                                        deploy_options=None
                                        )
 
