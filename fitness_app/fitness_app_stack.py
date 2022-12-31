@@ -1,4 +1,5 @@
 from constructs import Construct
+import boto3
 from aws_cdk import (
     Duration,
     Stack,
@@ -36,7 +37,7 @@ class FitnessAppStack(Stack):
 
         # creating s3 bucket for static web pages
         web_files_bucket = s3.Bucket(self, "FitnessAppStaticWebFiles", encryption=s3.BucketEncryption.KMS_MANAGED,
-                                     enforce_ssl=True)
+                                     enforce_ssl=True, versioned=True)
 
 
 
