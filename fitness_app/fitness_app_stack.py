@@ -40,6 +40,6 @@ class FitnessAppStack(Stack):
                                      enforce_ssl=True, versioned=True)
 
         # uploading web files to s3 bucket
-        s3_client = boto3.client('s3')
+        s3_client = boto3.resource('s3')
         s3_client.Bucket(web_files_bucket.bucket_name)
 
