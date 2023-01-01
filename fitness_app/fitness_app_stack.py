@@ -1,5 +1,6 @@
 from constructs import Construct
 import boto3
+import os
 from aws_cdk import (
     Duration,
     Stack,
@@ -41,5 +42,7 @@ class FitnessAppStack(Stack):
 
         # uploading web files to s3 bucket
         s3_client = boto3.resource('s3')
-        s3_client.Bucket(web_files_bucket.bucket_name)
+        wfb_bucket = s3_client.Bucket(web_files_bucket.bucket_name)
+        for file in os.listdir("./src/web/"):
+            wfb_bucket.upload_file(file, file)
 
