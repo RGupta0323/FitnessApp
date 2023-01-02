@@ -42,7 +42,7 @@ class FitnessAppStack(Stack):
 
         # uploading web files to s3 bucket
         s3_client = boto3.resource('s3')
-        wfb_bucket = s3_client.Bucket(web_files_bucket.bucket_name)
+        wfb_bucket = s3_client.Bucket("fitness-app-dev-stack-fitnessappstaticwebfiles659-1c9bv2im68wv0")
         for file in os.listdir("./src/web/"):
-            wfb_bucket.upload_file(file, file)
+            wfb_bucket.upload_file("./src/web/" + file, file)
 
