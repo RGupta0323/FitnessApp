@@ -2,6 +2,7 @@ import os
 
 import pytest
 from src.homepage_lambda import handler
+from src.lambda_utils import get_contents_s3_obj
 
 def test_homepagelambda():
     #print("test_homepagelambda; current working directory {}".format(os.getcwd()))
@@ -11,4 +12,10 @@ def test_homepagelambda():
     print(result["body"])
     assert result["body"]
 
-print(test_homepagelambda())
+
+def test_lambda_utils():
+    bucket_name = "fitness-app-dev-stack-fitnessappstaticwebfiles659-1c9bv2im68wv0"
+    response = get_contents_s3_obj(bucket_name, "register.html")
+    print(response)
+    assert type(response) == bytes
+    assert response != "" and response!=" "
