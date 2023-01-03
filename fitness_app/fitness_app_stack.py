@@ -46,7 +46,7 @@ class FitnessAppStack(Stack):
         s3_policy = iam.Policy(self, "fitness-app-lambda-policy-for-s3", statements=[
             iam.PolicyStatement(
                 actions=["s3:GetObject"],
-                resources=[wfb_bucket]
+                resources=[web_files_bucket.bucket_arn]
             )
         ])
         for file in os.listdir("./src/web/"):
