@@ -1,12 +1,10 @@
 # Displays home page
 import os
-import sys
+from lambda_utils import get_contents_s3_obj
 from jinja2 import Environment, FileSystemLoader
 def handler(event, context):
     print("homepage_lambda handler called")
-    env = Environment(loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), "web"), encoding="utf8"))
-    template = env.get_template("index.html")
-    html = template.render()
+    html = get_contents_s3_obj(bucket_name="fitness-app-dev-stack-fitnessappstaticwebfiles659-1c9bv2im68wv0", object_key="index.html")
     return {
             'statusCode': 200,
             'headers': {
