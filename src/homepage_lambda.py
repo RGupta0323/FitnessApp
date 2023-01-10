@@ -1,6 +1,6 @@
 # Displays home page
 import os
-from lambda_utils import get_contents_s3_obj
+from src.lambda_utils import get_contents_s3_obj
 from jinja2 import Environment, FileSystemLoader
 def handler(event, context):
     print("homepage_lambda handler called")
