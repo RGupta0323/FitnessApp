@@ -11,8 +11,9 @@ def handler(event, context):
                 "Access-Control-Allow-Origin": "*",
                 "Content-Type":"text/html"
             },
-            'body': str(html)
+            'body': html.decode()
     }
+
 
 
 
