@@ -1,7 +1,7 @@
 # Displays home page
 import os
-from src.lambda_utils import get_contents_s3_obj
-from jinja2 import Environment, FileSystemLoader
+print(os.getcwd())
+from lambda_utils import get_contents_s3_obj
 def handler(event, context):
     print("homepage_lambda handler called")
     html = get_contents_s3_obj(bucket_name="fitness-app-dev-stack-fitnessappstaticwebfiles659-1c9bv2im68wv0", object_key="index.html")
@@ -13,5 +13,6 @@ def handler(event, context):
             },
             'body': str(html)
     }
+
 
 

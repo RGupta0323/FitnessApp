@@ -1,12 +1,12 @@
 import os
-
-
 import pytest
+import sys
+
+sys.path.append(os.path.join(os.path.dirname(__file__), "..", "src"))
 from src.homepage_lambda import handler
 
+
 def test_homepagelambda():
-    #print("test_homepagelambda; current working directory {}".format(os.getcwd()))
-    #os.chdir("../src")
     result = handler(None, None)
     print(result["body"])
     assert type(result["body"]) == str
