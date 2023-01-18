@@ -45,6 +45,7 @@ class FitnessAppStack(Stack):
         wfb_bucket = s3_client.Bucket("fitness-app-dev-stack-fitnessappstaticwebfiles659-1c9bv2im68wv0")
 
         home_lambda.add_to_role_policy(iam.PolicyStatement(actions=["s3:GetObject"], resources=["*"]))
+        register_lambda.add_to_role_policy(iam.PolicyStatement(actions=["s3:GetObject"], resources=["*"]))
         for file in os.listdir("./src/web/"):
             wfb_bucket.upload_file("./src/web/" + file, file)
 

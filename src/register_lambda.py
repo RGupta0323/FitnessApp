@@ -3,7 +3,7 @@ import sys
 from jinja2 import Environment, FileSystemLoader
 from lambda_utils import get_contents_s3_obj
 def handler(event, context):
-    print("homepage_lambda handler called")
+    print("register_lambda handler called")
     '''env = Environment(loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), "web"), encoding="utf8"))
     template = env.get_template("register.html")
     html = template.render()
@@ -25,3 +25,4 @@ def handler(event, context):
         },
         'body': html.decode()
     }
+
