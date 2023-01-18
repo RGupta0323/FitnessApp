@@ -41,7 +41,7 @@ class FitnessAppStack(Stack):
         register_endpoint.add_method("GET", apigateway.LambdaIntegration(register_lambda))
 
         register_submit_form_endpoint = api.root.add_resource("register_form_submit")
-        register_submit_form_endpoint.add_method("GET", apigateway.LambdaIntegration(register_submit_form_lambda))
+        register_submit_form_endpoint.add_method("POST", apigateway.LambdaIntegration(register_submit_form_lambda))
 
         # creating s3 bucket for static web pages
         web_files_bucket = s3.Bucket(self, "FitnessAppStaticWebFiles", encryption=s3.BucketEncryption.KMS_MANAGED,
