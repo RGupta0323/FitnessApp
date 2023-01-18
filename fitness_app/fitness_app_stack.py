@@ -29,7 +29,7 @@ class FitnessAppStack(Stack):
                                            handler="register_lambda.handler")
 
         register_submit_form_lambda = _lambda.Function(self, id="RegisterSubmitFormLambda", runtime=_lambda.Runtime.PYTHON_3_7,
-                                                       code=_lambda.code.from_asset("src"),
+                                                       code=_lambda.Code.from_asset("src"),
                                                        handler="register_submit_form_lambda.handler")
 
 
