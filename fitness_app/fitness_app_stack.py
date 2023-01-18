@@ -28,6 +28,10 @@ class FitnessAppStack(Stack):
                                            code=_lambda.Code.from_asset("src"),
                                            handler="register_lambda.handler")
 
+        register_submit_form_lambda = _lambda.Function(self, id="RegisterSubmitFormLambda", runtime=_lambda.Runtime.PYTHON_3_7,
+                                                       code=_lambda.code.from_asset("src"),
+                                                       handler="register_submit_form_lambda.handler")
+
 
         api = apigateway.LambdaRestApi(self, "FitnessAppAPIGateway", handler=home_lambda,
                                        deploy_options=None
@@ -35,6 +39,8 @@ class FitnessAppStack(Stack):
 
         register_endpoint = api.root.add_resource("register") # adding endpiont in api gateway for register
         register_endpoint.add_method("GET", apigateway.LambdaIntegration(register_lambda))
+
+        register_submit_form_endpoint = api.root.add_resource("")
 
         # creating s3 bucket for static web pages
         web_files_bucket = s3.Bucket(self, "FitnessAppStaticWebFiles", encryption=s3.BucketEncryption.KMS_MANAGED,
