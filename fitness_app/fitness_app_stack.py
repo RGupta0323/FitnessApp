@@ -10,7 +10,8 @@ from aws_cdk import (
     aws_sns_subscriptions as subs,
     aws_lambda as _lambda,
     aws_apigateway as apigateway,
-    aws_s3 as s3
+    aws_s3 as s3,
+    aws_dynamodb as dynamodb
 )
 
 
@@ -41,7 +42,7 @@ class FitnessAppStack(Stack):
         register_endpoint.add_method("GET", apigateway.LambdaIntegration(register_lambda))
 
         register_submit_form_endpoint = api.root.add_resource("register_form_submit")
-        register_submit_form_endpoint.add_method("POST", apigateway.LambdaIntegration(register_submit_form_lambda))
+        register_submit_form_endpoint.add_method("PUT", apigateway.LambdaIntegration(register_submit_form_lambda))
 
         # creating s3 bucket for static web pages
         web_files_bucket = s3.Bucket(self, "FitnessAppStaticWebFiles", encryption=s3.BucketEncryption.KMS_MANAGED,
@@ -55,5 +56,13 @@ class FitnessAppStack(Stack):
         register_lambda.add_to_role_policy(iam.PolicyStatement(actions=["s3:GetObject"], resources=["*"]))
         for file in os.listdir("./src/web/"):
             wfb_bucket.upload_file("./src/web/" + file, file)
+
+        # dynamodb table for user data - this contains First Name, Last Name, Email, & Passwords
+        # This is to be used to login users in and to register users
+        # partition key is to be a randomly generated string id (this will tie users to other dynamodb tables with fitness data)
+        user_data_table = dynamodb.Table(self, "FitnessAppUserData",
+                               partition_key=dynamodb.Attribute(name="id", type=dynamodb.AttributeType.STRING),
+                               encryption=dynamodb.TableEncryption.AWS_MANAGED
+                               )
 
 

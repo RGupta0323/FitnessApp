@@ -7,12 +7,37 @@
 <body>
     <h1>Welcome to the Register Webpage! </h1>
 
+    <script>
+        function submit_data(){
+        // console.log("Hello");
+        //the terms that you want to add in database should be shown in data
+        const data = {
+            First Name: document.getElementById('fname').value,
+            Last Name: document.getElementById("lname").value,
+            email: document.getElementById('email').value,
+            password: document.getElementById("password").value
+}
+
+fetch('Invoke URL', {
+method: 'POST',
+headers: {'Content-Type': 'application/json',},
+body: JSON.stringify(data),})
+.then((response) => response.json())
+//Then with the data from the response in JSON...
+
+.then((data) => {console.log('Success:', data);})
+
+//Then with the error genereted...
+
+.catch((error) => {console.error('Error:', error);});}
+    </script>
+
     <div align="center">
          <a href="https://bvf9w4jaaj.execute-api.us-east-1.amazonaws.com/prod/">
                 <button> Back to Home </button>
      </a>
 
-     <form method="POST" action="https://bvf9w4jaaj.execute-api.us-east-1.amazonaws.com/prod/register_form_submit">
+     <form action="submit_data()">
         <label for="fname">First name:</label><br>
         <input type="text" id="fname" value=""><br><br>
          <label for="lname">Last name:</label><br>
