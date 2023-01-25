@@ -37,18 +37,19 @@
             password: document.getElementById("password").value
         }
 
-fetch('https://bvf9w4jaaj.execute-api.us-east-1.amazonaws.com/prod/register_form_submit', {
-method: 'POST',
-headers: {'Content-Type': 'application/json',},
-body: JSON.stringify(data),})
-.then((response) => response.json())
+//fetch('https://bvf9w4jaaj.execute-api.us-east-1.amazonaws.com/prod/register_form_submit', {
+//method: 'POST',
+//headers: {'Content-Type': 'application/json',},
+//body: JSON.stringify(data),})
+//.then((response) => response.json())
+
 //Then with the data from the response in JSON...
 
-.then((data) => {console.log('Success:', data);})
+//.then((data) => {console.log('Success:', data);})
 
 //Then with the error genereted...
 
-.catch((error) => {console.error('Error:', error);});}
+//.catch((error) => {console.error('Error:', error);});}
     </script>
 
     </div>
