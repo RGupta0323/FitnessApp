@@ -5,6 +5,8 @@ import boto3
 from boto3.dynamodb.conditions import Key
 
 def handler(event, context):
+    print("register_submit_form_lambda triggered")
+    print("Event: {}".format(event))
     # query dynamo db to see if the user is in the database
     query_response= None
     try:

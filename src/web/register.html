@@ -10,13 +10,14 @@
     <script>
         function submit_data(){
         // console.log("Hello");
+        console.log("Entered submit_data() function in Register.html");
         //the terms that you want to add in database should be shown in data
         const data = {
             First Name: document.getElementById('fname').value,
             Last Name: document.getElementById("lname").value,
             email: document.getElementById('email').value,
             password: document.getElementById("password").value
-}
+        }
 
 fetch('https://bvf9w4jaaj.execute-api.us-east-1.amazonaws.com/prod/register_form_submit', {
 method: 'POST',
