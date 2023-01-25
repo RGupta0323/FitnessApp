@@ -7,7 +7,25 @@
 <body>
     <h1>Welcome to the Register Webpage! </h1>
 
-    <script>
+
+    <div align="center">
+         <a href="https://bvf9w4jaaj.execute-api.us-east-1.amazonaws.com/prod/">
+                <button> Back to Home </button>
+     </a>
+
+     <form action="submit_data()">
+        <label for="fname">First name:</label><br>
+        <input type="text" id="fname" value=""><br><br>
+         <label for="lname">Last name:</label><br>
+        <input type="text" id="lname" value=""><br><br>
+         <label for="email">Email:</label><br>
+        <input type="email" id="email" value=""><br><br>
+         <label for="password">Password:</label><br>
+        <input type="password" id="password" value=""><br><br>
+        <input type="submit" value="Submit">
+     </form>
+
+         <script>
         function submit_data(){
         // console.log("Hello");
         console.log("Entered submit_data() function in Register.html");
@@ -33,22 +51,6 @@ body: JSON.stringify(data),})
 .catch((error) => {console.error('Error:', error);});}
     </script>
 
-    <div align="center">
-         <a href="https://bvf9w4jaaj.execute-api.us-east-1.amazonaws.com/prod/">
-                <button> Back to Home </button>
-     </a>
-
-     <form action="submit_data()">
-        <label for="fname">First name:</label><br>
-        <input type="text" id="fname" value=""><br><br>
-         <label for="lname">Last name:</label><br>
-        <input type="text" id="lname" value=""><br><br>
-         <label for="email">Email:</label><br>
-        <input type="email" id="email" value=""><br><br>
-         <label for="password">Password:</label><br>
-        <input type="password" id="password" value=""><br><br>
-        <input type="submit" value="Submit">
-     </form>
     </div>
 </body>
 </html>
