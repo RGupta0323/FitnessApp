@@ -2,14 +2,15 @@
 # this inserts user data into the dynamodb table and then ideally logs them in
 import json
 import boto3
+from boto3.dynamodb.conditions import Key
 
-dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table('FitnessAppUserData')
 def handler(event, context):
     # query dynamo db to see if the user is in the database
+    query_response= None
     try:
-        client = boto3.client('dynamodb')
-        client.query(TableName="FitnessAppUserData", Select="ALL_ATTRIBUTES")
+        client = boto3.client('dynamodb', region_name="us-east-1")
+        query_response = client.query(TableName="FitnessAppUserData", KeyConditionExpression=Key("email").eq(event["email"]))
+        print(query_response)
     # if the user is in the database then display a message indicating that a user with that email has an account and
     # re-direct to login page.
     except Exception as ex:
@@ -19,7 +20,9 @@ def handler(event, context):
 
     # if the user is not in the database, then proceed
     # If its the same email - then the lambda should re-direct the user to
-    table.put_item(Item=event)
+    dynamodb = boto3.resource('dynamodb')
+    table = dynamodb.Table('FitnessAppUserData')
+    # table.put_item(Item=event)
 
     # redirect user to the login page & log user in
     return {"statuscode": 200 }

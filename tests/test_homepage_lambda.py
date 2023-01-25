@@ -12,6 +12,6 @@ def test_homepagelambda():
     assert type(result["body"]) == str
     assert result["body"]
 
-test_homepagelambda()
+
 
 
