@@ -13,7 +13,7 @@
                 <button> Back to Home </button>
      </a>
 
-     <form action="return submit_data()">
+     <form method="post">
         <label for="fname">First name:</label><br>
         <input type="text" id="fname" value=""><br><br>
          <label for="lname">Last name:</label><br>
@@ -22,7 +22,7 @@
         <input type="email" id="email" value=""><br><br>
          <label for="password">Password:</label><br>
         <input type="password" id="password" value=""><br><br>
-        <input type="submit" value="Submit">
+        <input type="submit" onClick = "submit_data()" value="Submit">
      </form>
 
          <script>
