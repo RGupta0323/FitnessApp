@@ -8,7 +8,7 @@
     <h1>Welcome to the Register Webpage! </h1>
 
     <script>
-        function submit_data(event){
+        function submit_data(){
             // console.log("Hello");
             console.log("Entered submit_data() function in Register.html");
             console.log(event)
@@ -47,7 +47,7 @@
         <input type="email" id="email" value=""><br><br>
          <label for="password">Password:</label><br>
         <input type="password" id="password" value=""><br><br>
-        <input type="submit" onClick = "submit_data()" value="Submit">
+        <input type="submit" onClick = "submit_data()" onclick="submit_data()" value="Submit">
      </form>
 
 
