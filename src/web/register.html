@@ -13,7 +13,7 @@
                 <button> Back to Home </button>
      </a>
 
-     <form action="submit_data()">
+     <form action="return submit_data()">
         <label for="fname">First name:</label><br>
         <input type="text" id="fname" value=""><br><br>
          <label for="lname">Last name:</label><br>
@@ -37,6 +37,7 @@
                 email: document.getElementById('email').value,
                 password: document.getElementById("password").value
             }
+            alert("Data: " + data);
         }
 
 
