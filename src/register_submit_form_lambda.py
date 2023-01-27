@@ -35,5 +35,8 @@ def handler(event, context):
         return {"statuscode": 400, "message":"Error occured while inserting data in dynamodb. Exception: {}".format(ex)}
 
     # redirect user to the login page & log user in
-    return {"statuscode": 200, "body":"put operation was successful."}
+    return {"isBase64Encoded": True,
+            "statusCode": 200,
+            "headers": {"Content-Type": "application/json"},
+            "body": "dynamodb put operation successful. "}
 
