@@ -65,4 +65,10 @@ class FitnessAppStack(Stack):
                                encryption=dynamodb.TableEncryption.AWS_MANAGED
                                )
 
+        register_submit_form_lambda.add_to_role_policy(iam.PolicyStatement(
+            effect=iam.Effect.ALLOW,
+            actions=["dynamodb:PutItem"],
+            resources=[str(user_data_table.table_arn)]
+        ))
+
 
