@@ -27,7 +27,7 @@ def handler(event, context):
     try:
         dynamodb = boto3.resource('dynamodb')
         table = dynamodb.Table('fitness-app-dev-stack-FitnessAppUserData5D9F0F31-YQPUN4XKQ00I')
-        event["id"] = "0" # this line has been added for testing; please remove & replace with a random id generator or logic to
+        event["id"] = "01" # this line has been added for testing; please remove & replace with a random id generator or logic to
         # add ids that aren't in the db
         table.put_item(Item=event)
 
