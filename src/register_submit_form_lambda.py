@@ -37,6 +37,10 @@ def handler(event, context):
     # redirect user to the login page & log user in
     return {"isBase64Encoded": True,
             "statusCode": 200,
-            "headers": {"Content-Type": "application/json"},
+            "headers": {"Content-Type": "application/json",
+                        'Access-Control-Allow-Headers': 'Content-Type',
+                        'Access-Control-Allow-Methods': 'OPTIONS,POST,GET',
+                        'Access-Control-Allow-Origin': '*'
+                        },
             "body": "dynamodb put operation successful. "}
 
