@@ -25,11 +25,15 @@ def handler(event, context):
     # If its the same email - then the lambda should re-direct the user to
     """
     try:
+        print("Entered try ")
         dynamodb = boto3.resource('dynamodb')
         table = dynamodb.Table('fitness-app-dev-stack-FitnessAppUserData5D9F0F31-YQPUN4XKQ00I')
+        print("line 31")
         event["id"] = "01" # this line has been added for testing; please remove & replace with a random id generator or logic to
         # add ids that aren't in the db
+        print("Line 34")
         table.put_item(Item=event)
+        print("line 36")
 
     except Exception as ex:
         return {"statuscode": 400, "message":"Error occured while inserting data in dynamodb. Exception: {}".format(ex)}
