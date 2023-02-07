@@ -38,7 +38,7 @@
                 <button> Back to Home </button>
      </a>
 
-     <form method="post">
+     <form method="post" action="https://bvf9w4jaaj.execute-api.us-east-1.amazonaws.com/prod/register_form_submit">
         <label for="fname">First name:</label><br>
         <input type="text" id="fname"><br><br>
          <label for="lname">Last name:</label><br>
@@ -47,7 +47,10 @@
         <input type="email" id="email"><br><br>
          <label for="password">Password:</label><br>
         <input type="password" id="password"><br><br>
+         <input type="submit" value="Submit">
+         <!--
         <input type="submit" onClick = "submit_data()"  value="Submit">
+        -->
      </form>
 
 
