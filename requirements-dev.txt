@@ -1,3 +1,4 @@
 pytest==6.2.5
 Flask==2.2.2
 Jinja2==3.1.2
+serverless-wsgi==3.0.1

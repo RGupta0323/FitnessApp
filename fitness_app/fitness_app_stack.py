@@ -20,6 +20,9 @@ class FitnessAppStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
+        flask_lambda = _lambda.Function(self, "FlaskHandler", runtime=_lambda.Runtime.PYTHON_3_7,
+                                        code=_lambda.Code.from_asset("src"), handler="flask_lambda.handler")
+
         home_lambda = _lambda.Function(self, id="HomeLambda",
                                    runtime=_lambda.Runtime.PYTHON_3_7,
                                    code=_lambda.Code.from_asset("src"),
@@ -29,9 +32,9 @@ class FitnessAppStack(Stack):
                                            code=_lambda.Code.from_asset("src"),
                                            handler="register_lambda.handler")
 
-        register_submit_form_lambda = _lambda.Function(self, id="RegisterSubmitFormLambda", runtime=_lambda.Runtime.PYTHON_3_7,
+        dynamo_lambda = _lambda.Function(self, id="DynamoLambda", runtime=_lambda.Runtime.PYTHON_3_7,
                                                        code=_lambda.Code.from_asset("src"),
-                                                       handler="register_submit_form_lambda.handler")
+                                                       handler="dynamo_lambda.handler")
 
 
         api = apigateway.LambdaRestApi(self, "FitnessAppAPIGateway", handler=home_lambda,
@@ -41,8 +44,7 @@ class FitnessAppStack(Stack):
         register_endpoint = api.root.add_resource("register") # adding endpiont in api gateway for register
         register_endpoint.add_method("GET", apigateway.LambdaIntegration(register_lambda))
 
-        register_submit_form_endpoint = api.root.add_resource("register_form_submit")
-        register_submit_form_endpoint.add_method("PUT", apigateway.LambdaIntegration(register_submit_form_lambda))
+
 
         # creating s3 bucket for static web pages
         web_files_bucket = s3.Bucket(self, "FitnessAppStaticWebFiles", encryption=s3.BucketEncryption.KMS_MANAGED,
@@ -65,7 +67,7 @@ class FitnessAppStack(Stack):
                                encryption=dynamodb.TableEncryption.AWS_MANAGED
                                )
 
-        register_submit_form_lambda.add_to_role_policy(iam.PolicyStatement(
+        dynamo_lambda.add_to_role_policy(iam.PolicyStatement(
             effect=iam.Effect.ALLOW,
             actions=["dynamodb:PutItem"],
             resources=[str(user_data_table.table_arn)]
