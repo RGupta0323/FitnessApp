@@ -23,26 +23,11 @@ class FitnessAppStack(Stack):
         flask_lambda = _lambda.Function(self, "FlaskHandler", runtime=_lambda.Runtime.PYTHON_3_7,
                                         code=_lambda.Code.from_asset("src"), handler="flask_lambda.handler")
 
-        home_lambda = _lambda.Function(self, id="HomeLambda",
-                                   runtime=_lambda.Runtime.PYTHON_3_7,
-                                   code=_lambda.Code.from_asset("src"),
-                                   handler="homepage_lambda.handler")
-
-        register_lambda = _lambda.Function(self, id="RegisterLambda", runtime=_lambda.Runtime.PYTHON_3_7,
-                                           code=_lambda.Code.from_asset("src"),
-                                           handler="register_lambda.handler")
-
         dynamo_lambda = _lambda.Function(self, id="DynamoLambda", runtime=_lambda.Runtime.PYTHON_3_7,
                                                        code=_lambda.Code.from_asset("src"),
                                                        handler="dynamo_lambda.handler")
 
 
-        api = apigateway.LambdaRestApi(self, "FitnessAppAPIGateway", handler=home_lambda,
-                                       deploy_options=None
-                                       )
-
-        register_endpoint = api.root.add_resource("register") # adding endpiont in api gateway for register
-        register_endpoint.add_method("GET", apigateway.LambdaIntegration(register_lambda))
 
 
 
@@ -54,8 +39,7 @@ class FitnessAppStack(Stack):
         s3_client = boto3.resource('s3')
         wfb_bucket = s3_client.Bucket("fitness-app-dev-stack-fitnessappstaticwebfiles659-1c9bv2im68wv0")
 
-        home_lambda.add_to_role_policy(iam.PolicyStatement(actions=["s3:GetObject"], resources=["*"]))
-        register_lambda.add_to_role_policy(iam.PolicyStatement(actions=["s3:GetObject"], resources=["*"]))
+
         for file in os.listdir("./src/web/"):
             wfb_bucket.upload_file("./src/web/" + file, file)
 
