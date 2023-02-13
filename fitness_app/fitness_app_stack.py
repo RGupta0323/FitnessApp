@@ -81,19 +81,6 @@ class FitnessAppStack(Stack):
             )
         )
 
-
-        # creating s3 bucket for static web pages
-        web_files_bucket = s3.Bucket(self, "FitnessAppStaticWebFiles", encryption=s3.BucketEncryption.KMS_MANAGED,
-                                     enforce_ssl=True, versioned=True)
-
-        # uploading web files to s3 bucket
-        s3_client = boto3.resource('s3')
-        wfb_bucket = s3_client.Bucket("fitness-app-dev-stack-fitnessappstaticwebfiles659-1c9bv2im68wv0")
-
-
-        for file in os.listdir("./src/web/"):
-            wfb_bucket.upload_file("./src/web/" + file, file)
-
         # dynamodb table for user data - this contains First Name, Last Name, Email, & Passwords
         # This is to be used to login users in and to register users
         # partition key is to be a randomly generated string id (this will tie users to other dynamodb tables with fitness data)
