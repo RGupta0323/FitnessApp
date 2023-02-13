@@ -27,7 +27,7 @@ def register():
         response = create_user(client, cognito_user_pool_id, email)
         print(response)
         clientID = response["User"]["Username"]
-        sign_up_user(client, ClientID=clientID, Username=email, password=password)
+        sign_up_user(client, ClientID=clientID, username=email, password=password)
 
         # check if successful
 
