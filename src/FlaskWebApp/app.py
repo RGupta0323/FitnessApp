@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 import serverless_wsgi
 import boto3
-from cognito_utils import create_user, sign_up_user
+from src.FlaskWebApp.cognito_utils import create_user, sign_up_user
 
 app = Flask(__name__)
 @app.route("/")
