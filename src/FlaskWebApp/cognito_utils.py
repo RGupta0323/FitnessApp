@@ -3,6 +3,7 @@
 def sign_up_user(client, ClientID, username, password):
     try:
         response = client.sign_up(ClientId=ClientID, Username=username, Password=password)
+        print(response)
         return response
 
     except Exception as ex:
