@@ -74,12 +74,13 @@ class FitnessAppStack(Stack):
                                              )
 
         app_client = cognito_user_pool.add_client(
-            "awesome-app-client",
+            "fitness-app-client",
             user_pool_client_name="awesome-app-client",
             auth_flows=cognito.AuthFlow(
                 user_password=True
             )
         )
+
 
         # dynamodb table for user data - this contains First Name, Last Name, Email, & Passwords
         # This is to be used to login users in and to register users
