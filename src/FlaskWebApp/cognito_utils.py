@@ -31,6 +31,8 @@ def create_user(client, UserPoolId, email):
 
         print(response)
 
+        return response
+
     except Exception as ex:
         print("Error has occured when trying to create user in create_user() function in cognito_utils.py")
         print("Error: {}".format(ex))

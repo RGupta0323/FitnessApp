@@ -25,6 +25,7 @@ def register():
         client = boto3.client('cognito-idp', region_name="us-east-1")
         cognito_user_pool_id = "us-east-1_QLQL2ORW0"
         response = create_user(client, cognito_user_pool_id, email)
+        print(response)
         clientID = response["User"]["Username"]
         sign_up_user(client, ClientID=clientID, Username=email, password=password)
 
