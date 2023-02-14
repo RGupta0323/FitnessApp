@@ -47,7 +47,7 @@ class FitnessAppStack(Stack):
                                              ),
                                              standard_attributes=cognito.StandardAttributes(
                                                  fullname=cognito.StandardAttribute(
-                                                     required=True,
+                                                     required=False,
                                                      mutable=True,
                                                  )
                                              ),
