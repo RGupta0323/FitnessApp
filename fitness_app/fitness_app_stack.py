@@ -46,9 +46,9 @@ class FitnessAppStack(Stack):
                                                  email_style=cognito.VerificationEmailStyle.CODE
                                              ),
                                              standard_attributes=cognito.StandardAttributes(
-                                                 email=cognito.StandardAttribute(
+                                                 fullname=cognito.StandardAttribute(
                                                      required=False,
-                                                     mutable=False,
+                                                     mutable=True,
                                                  )
                                              ),
                                              custom_attributes={
