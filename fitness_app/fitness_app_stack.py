@@ -5,13 +5,12 @@ from aws_cdk import (
     Duration,
     Stack,
     aws_iam as iam,
-    aws_sqs as sqs,
-    aws_sns as sns,
-    aws_sns_subscriptions as subs,
     aws_lambda as _lambda,
     aws_apigateway as apigateway,
     aws_s3 as s3,
-    aws_dynamodb as dynamodb
+    aws_dynamodb as dynamodb,
+    aws_cognito as cognito,
+    RemovalPolicy
 )
 
 
@@ -20,42 +19,64 @@ class FitnessAppStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
-        home_lambda = _lambda.Function(self, id="HomeLambda",
-                                   runtime=_lambda.Runtime.PYTHON_3_7,
-                                   code=_lambda.Code.from_asset("src"),
-                                   handler="homepage_lambda.handler")
+        flask_lambda = _lambda.Function(self, "FlaskHandler", runtime=_lambda.Runtime.PYTHON_3_7,
+                                        code=_lambda.Code.from_asset("src"), handler="flask_lambda.handler")
 
-        register_lambda = _lambda.Function(self, id="RegisterLambda", runtime=_lambda.Runtime.PYTHON_3_7,
-                                           code=_lambda.Code.from_asset("src"),
-                                           handler="register_lambda.handler")
-
-        register_submit_form_lambda = _lambda.Function(self, id="RegisterSubmitFormLambda", runtime=_lambda.Runtime.PYTHON_3_7,
+        dynamo_lambda = _lambda.Function(self, id="DynamoLambda", runtime=_lambda.Runtime.PYTHON_3_7,
                                                        code=_lambda.Code.from_asset("src"),
-                                                       handler="register_submit_form_lambda.handler")
+                                                       handler="dynamo_lambda.handler")
 
 
-        api = apigateway.LambdaRestApi(self, "FitnessAppAPIGateway", handler=home_lambda,
-                                       deploy_options=None
-                                       )
 
-        register_endpoint = api.root.add_resource("register") # adding endpiont in api gateway for register
-        register_endpoint.add_method("GET", apigateway.LambdaIntegration(register_lambda))
+        # cognito - for user auth
+        cognito_user_pool = cognito.UserPool(self, "awesome-user-pool",
+                                             user_pool_name="awesome-user-pool",
+                                             sign_in_aliases=cognito.SignInAliases(
+                                                 email=True
+                                             ),
+                                             self_sign_up_enabled=True,
+                                             auto_verify=cognito.AutoVerifiedAttrs(
+                                                 email=True
+                                                 # This is True by default if email is defined in SignInAliases
+                                             ),
+                                             user_verification=cognito.UserVerificationConfig(
+                                                 email_subject="You need to verify your email",
+                                                 email_body="Thanks for signing up Your verification code is {####}",
+                                                 # This placeholder is a must if code is selected as preferred verification method
+                                                 email_style=cognito.VerificationEmailStyle.CODE
+                                             ),
+                                             standard_attributes=cognito.StandardAttributes(
+                                                 fullname=cognito.StandardAttribute(
+                                                     required=True,
+                                                     mutable=True,
+                                                 )
+                                             ),
+                                             custom_attributes={
+                                                 "tenant_id": cognito.StringAttribute(min_len=10, max_len=15,
+                                                                                      mutable=False),
+                                                 "created_at": cognito.DateTimeAttribute(),
+                                                 "employee_id": cognito.NumberAttribute(min=1, max=100, mutable=False),
+                                                 "is_admin": cognito.BooleanAttribute(mutable=True),
+                                             },
+                                             password_policy=cognito.PasswordPolicy(
+                                                 min_length=8,
+                                                 require_lowercase=True,
+                                                 require_uppercase=True,
+                                                 require_digits=True,
+                                                 require_symbols=True
+                                             ),
+                                             account_recovery=cognito.AccountRecovery.EMAIL_ONLY,
+                                             removal_policy=RemovalPolicy.DESTROY
+                                             )
 
-        register_submit_form_endpoint = api.root.add_resource("register_form_submit")
-        register_submit_form_endpoint.add_method("PUT", apigateway.LambdaIntegration(register_submit_form_lambda))
+        app_client = cognito_user_pool.add_client(
+            "fitness-app-client",
+            user_pool_client_name="awesome-app-client",
+            auth_flows=cognito.AuthFlow(
+                user_password=True
+            )
+        )
 
-        # creating s3 bucket for static web pages
-        web_files_bucket = s3.Bucket(self, "FitnessAppStaticWebFiles", encryption=s3.BucketEncryption.KMS_MANAGED,
-                                     enforce_ssl=True, versioned=True)
-
-        # uploading web files to s3 bucket
-        s3_client = boto3.resource('s3')
-        wfb_bucket = s3_client.Bucket("fitness-app-dev-stack-fitnessappstaticwebfiles659-1c9bv2im68wv0")
-
-        home_lambda.add_to_role_policy(iam.PolicyStatement(actions=["s3:GetObject"], resources=["*"]))
-        register_lambda.add_to_role_policy(iam.PolicyStatement(actions=["s3:GetObject"], resources=["*"]))
-        for file in os.listdir("./src/web/"):
-            wfb_bucket.upload_file("./src/web/" + file, file)
 
         # dynamodb table for user data - this contains First Name, Last Name, Email, & Passwords
         # This is to be used to login users in and to register users
@@ -65,7 +86,7 @@ class FitnessAppStack(Stack):
                                encryption=dynamodb.TableEncryption.AWS_MANAGED
                                )
 
-        register_submit_form_lambda.add_to_role_policy(iam.PolicyStatement(
+        dynamo_lambda.add_to_role_policy(iam.PolicyStatement(
             effect=iam.Effect.ALLOW,
             actions=["dynamodb:PutItem"],
             resources=[str(user_data_table.table_arn)]

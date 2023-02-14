@@ -1,0 +1,9 @@
+{
+    "dev": {
+        "app_function": "src.FlaskWebApp.app.app",
+        "profile_name": "default",
+        "project_name": "fitnessapp",
+        "runtime": "python3.9",
+        "s3_bucket": "zappa-5s8o0k665"
+    }
+}
