@@ -1,4 +1,4 @@
-name: Cdk Template Dev
+name: Dev Deploy
 
 on:
   push:
