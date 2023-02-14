@@ -29,8 +29,8 @@ class FitnessAppStack(Stack):
 
 
         # cognito - for user auth
-        cognito_user_pool = cognito.UserPool(self, "awesome-user-pool",
-                                             user_pool_name="awesome-user-pool",
+        cognito_user_pool = cognito.UserPool(self, "FitnessApp-User-Pool",
+                                             user_pool_name="FitnessApp-User-Pool",
                                              sign_in_aliases=cognito.SignInAliases(
                                                  email=True
                                              ),
