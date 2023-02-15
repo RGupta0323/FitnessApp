@@ -41,9 +41,10 @@ class FitnessAppStack(Stack):
                                              ),
                                              user_verification=cognito.UserVerificationConfig(
                                                  email_subject="You need to verify your email",
-                                                 email_body="Thanks for signing up Your verification code is {####}",
+                                                 email_body="Thanks for signing up.  Please click on this link to verify your account - {####}",
                                                  # This placeholder is a must if code is selected as preferred verification method
-                                                 email_style=cognito.VerificationEmailStyle.CODE
+                                                 email_style=cognito.VerificationEmailStyle.LINK
+
                                              ),
                                              standard_attributes=cognito.StandardAttributes(
                                                  fullname=cognito.StandardAttribute(
