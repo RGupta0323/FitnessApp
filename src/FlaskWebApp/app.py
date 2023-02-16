@@ -12,6 +12,10 @@ def home():
 def home():
     return render_template("Home.html")
 
+@app.route("/createworkout", methods=["GET"])
+def createworkout():
+    return render_template("createworkout.html")
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":

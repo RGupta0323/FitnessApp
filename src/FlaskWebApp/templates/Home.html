@@ -12,6 +12,8 @@ They are able to create individual workouts, organize them,
     <!-- Existing workouts can exist here with a folder structure (user can navigate -->
 
     <!-- button to create a workout here -->
-     <button type="button">Create a Workout</button>
-</body>>
+     <button type="button">
+         <a href="{{ url_for('createworkout') }}">Create a Workout</a>
+     </button>
+</body>
 </html>
