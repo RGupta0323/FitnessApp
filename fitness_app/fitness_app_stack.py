@@ -28,6 +28,9 @@ class FitnessAppStack(Stack):
 
 
 
+        # lightsail instance - for hosting web app
+
+        # route53 - domain name stuff to give cognito
         # cognito - for user auth
         cognito_user_pool = cognito.UserPool(self, "Fitness-App-User-Pool",
                                              user_pool_name="Fitness-App-User-Pool",

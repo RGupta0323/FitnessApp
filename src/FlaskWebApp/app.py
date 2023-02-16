@@ -8,6 +8,10 @@ app = Flask(__name__)
 def home():
     return render_template("index.html")
 
+@app.route("/home", methods=["GET"])
+def home():
+    return render_template("Home.html")
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
