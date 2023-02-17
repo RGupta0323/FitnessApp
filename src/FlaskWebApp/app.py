@@ -5,7 +5,7 @@ from src.FlaskWebApp.cognito_utils import create_user, sign_up_user
 
 app = Flask(__name__)
 @app.route("/")
-def home():
+def index():
     return render_template("index.html")
 
 @app.route("/home", methods=["GET"])

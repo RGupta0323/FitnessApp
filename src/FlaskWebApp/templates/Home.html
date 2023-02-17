@@ -7,10 +7,31 @@ They are able to create individual workouts, organize them,
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+
 </head>
 <body>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/Home.css') }}">
     <!-- Existing workouts can exist here with a folder structure (user can navigate -->
-
+    <div class="app">
+        <table class="tracker">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Workout</th>
+                        <th>Duration</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody class="tracker__entries"></tbody>
+                <tbody>
+                    <tr class="tracker__row tracker__row--add">
+                        <td colspan="4">
+                            <span class="tracker__add">Add Entry &plus;</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
     <!-- button to create a workout here -->
      <button type="button">
          <a href="{{ url_for('createworkout') }}">Create a Workout</a>
