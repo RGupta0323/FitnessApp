@@ -28,9 +28,8 @@ class WorkoutTracker {
             <table class="tracker">
                 <thead>
                     <tr>
-                        <th>Date</th>
-                        <th>Workout</th>
-                        <th>Duration</th>
+                        <th>Workout Name</th>
+                        <th>Tags</th>
                         <th></th>
                     </tr>
                 </thead>
