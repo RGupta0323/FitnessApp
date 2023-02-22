@@ -6,20 +6,39 @@
 </head>
 <body>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/createexercise.css') }}">
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- selectize js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
+
     <h1>Create a Exercise!</h1>
 
-    <input id="searchbar" onkeyup="search_animal()" type="text"
-        name="search" placeholder="Search animals..">
+    <script>
+        $(document).ready(function () {
+      $('select').selectize({
+          sortField: 'text'
+      });
+  });
+    </script>
 
-    <ol id='list'>
-        <li class="exercises">Barbell Bench Press</li>
-        <li class="exercises">Overhead Press (Barbell)</li>
-        <li class="exercises">Barbell Incline Bench Press</li>
-        <li class="exercises">Barbell Rows</li>
-        <li class="exercises">Pull-Ups</li>
-        <li class="exercises">Chest Dips</li>
-        <li class="exercises">Barbell Squat</li>
-        <li class="exercises">Deadlift (Barbell)</li>
-    </ol>
+   <select id="select-state" placeholder="Pick a state...">
+    <option value="">Select a state...</option>
+    <option value="AL">Alabama</option>
+    <option value="AK">Alaska</option>
+    <option value="AZ">Arizona</option>
+    <option value="AR">Arkansas</option>
+    <option value="CA">California</option>
+    <option value="CO">Colorado</option>
+    <option value="CT">Connecticut</option>
+    <option value="DE">Delaware</option>
+    <option value="DC">District of Columbia</option>
+    <option value="FL">Florida</option>
+    <option value="GA">Georgia</option>
+    <option value="HI">Hawaii</option>
+    <option value="ID">Idaho</option>
+    <option value="IL">Illinois</option>
+    <option value="IN">Indiana</option>
+  </select>
 </body>
 </html>
