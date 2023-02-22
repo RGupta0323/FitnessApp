@@ -7,6 +7,12 @@
 <body>
         <h1>Webpage to create a workout</h1>
 
-        <!-- Button here to create an exercise which should reveal a drop down of different exercises -->
+        <!-- Button here to create an exercise which should reveal a drop down of different exercises.
+            For now, user can just add whatever exercise he wants. This will have to be adjusted later.
+         -->
+        <button type="button">
+            <a href="{{ url_for('createexercise') }}">Add Exercise</a>
+        </button>
+
 </body>
 </html>

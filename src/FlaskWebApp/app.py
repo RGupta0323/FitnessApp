@@ -12,9 +12,13 @@ def index():
 def home():
     return render_template("Home.html")
 
-@app.route("/createworkout", methods=["GET"])
+@app.route("/createworkout", methods=["GET", "POST"])
 def createworkout():
     return render_template("createworkout.html")
+
+@app.route("/createexercise", methods=["GET"])
+def createexercise():
+    return render_template("createexercise.html")
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
