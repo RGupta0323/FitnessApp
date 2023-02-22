@@ -5,9 +5,24 @@
     <title>Create a exercise</title>
 </head>
 <body>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/createexercise.css') }}">
     <h1>Create a Exercise!</h1>
 
     <input id="searchbar" onkeyup="search_animal()" type="text"
         name="search" placeholder="Search animals..">
+
+    <ol id='list'>
+        <li class="animals">Cat</li>
+        <li class="animals">Dog</li>
+        <li class="animals">Elephant</li>
+        <li class="animals">Fish</li>
+        <li class="animals">Gorilla</li>
+        <li class="animals">Monkey</li>
+        <li class="animals">Turtle</li>
+        <li class="animals">Whale</li>
+        <li class="animals">Aligator</li>
+        <li class="animals">Donkey</li>
+        <li class="animals">Horse</li>
+    </ol>
 </body>
 </html>
