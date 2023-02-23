@@ -20,8 +20,12 @@ def createworkout():
 def createexercise():
     return render_template("createexercise.html")
 
-@app.route("/modifyexercise/<exercise>", methods=["POST"])
+@app.route("/modifyexercise/<exercise>", methods=["GET", "POST"])
 def modifyexercise(exercise):
+    exercise_dict = {"BBP" : "Barbell Bench Press", "BS": "Barbell Squat", "BIBP": "Barbell Incline Bench Press",
+                     "BR":"Barbell Rows", "PU":"Pull-Ups", "CD":"Chest Dips", "BD":"Barbell Deadlift", "BOP":"Barbell Overhead Press"
+                     }
+    exercise = exercise_dict[exercise]
     return render_template("modifyexercise.html", exercise=exercise)
 
 @app.route("/register", methods=["GET", "POST"])

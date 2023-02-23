@@ -5,6 +5,38 @@
     <title>Title</title>
 </head>
 <body>
+         <!-- jquery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <style>
+            form {
+                padding: 20px;
+            }
+
+            input {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+        </style>
+         <script>
+             $(document).on('click', '.add_field', function() {
+  $('<input type="text" class="input" name="field[]" value="">').insertAfter('.input:last');
+})
+         </script>
         <h1>You selected {{ exercise }} exercise. </h1>
+
+        <form>
+            Set 1:
+            <input type="text" name="set1">
+        </form>
+
+        <button type="button" class="add_field">Add Another Set</button>
+
+         <!-- this button is going to take the data that the user enters in teh table, and then adds it to the createexercise.html
+         so it shows up over there.
+         And the user can create another exercise
+         -->
+        <button type="button">
+            <a href="">Done</a>
+        </button>
 </body>
 </html>
