@@ -20,6 +20,10 @@ def createworkout():
 def createexercise():
     return render_template("createexercise.html")
 
+@app.route("/modifyexercise/<exercise>", methods=["POST"])
+def modifyexercise(exercise):
+    return render_template("modifyexercise.html", exercise=exercise)
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
