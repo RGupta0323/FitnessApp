@@ -22,7 +22,6 @@
                 var keepGoing = true ;
   var target_div;
   var i = 1;
-  console.log("before while loop");
   while(keepGoing == true){
       target_div = $("#set"+i)[0]
       if(target_div == undefined){
@@ -31,9 +30,7 @@
       }
       i = i + 1;
   }
-console.log("after while loop");
-console.log(i)
-console.log('set'+'${i}');
+
 var div_id = 'set'+i.toString()
 var weight = 'set'+i.toString()+'weight';
 var reps = 'set'+i.toString()+'reps';
@@ -42,7 +39,6 @@ var reps = 'set'+i.toString()+'reps';
                 Weight: <input type='text' name='${weight}'>
                 Reps: <input type="text" name='${reps}'> </div>`
 
-console.log(html);
 
   $("#set"+(i-1).toString()).after(html)
   console.log("after jquery");
@@ -52,7 +48,7 @@ console.log(html);
 
         <form>
             <div class="set" id="set1">
-                Set 1:
+                <h1>Set 1: </h1>
                 Weight: <input type="text" name="set1weight">
                 Reps: <input type="text" name="set1reps">
             </div>
