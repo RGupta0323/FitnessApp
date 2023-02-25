@@ -46,22 +46,26 @@ var reps = 'set'+i.toString()+'reps';
          </script>
         <h1>You selected {{ exercise }} exercise. </h1>
 
-        <form>
+        <form action="http://127.0.0.1:5000/createworkout" method="POST">
             <div class="set" id="set1">
                 <h1>Set 1: </h1>
                 Weight: <input type="text" name="set1weight">
                 Reps: <input type="text" name="set1reps">
             </div>
+
+            <!--
+                this button is going to take the data that the user enters in teh table, and then adds it to the createexercise.html
+                so it shows up over there.
+                And the user can create another exercise
+            -->
+            <button>
+                <input type = "submit" value = "submit" />
+            </button>
         </form>
 
         <button type="button" class="add_field">Add Another Set</button>
 
-         <!-- this button is going to take the data that the user enters in teh table, and then adds it to the createexercise.html
-         so it shows up over there.
-         And the user can create another exercise
-         -->
-        <button type="button">
-            <a href="">Done</a>
-        </button>
+
+
 </body>
 </html>

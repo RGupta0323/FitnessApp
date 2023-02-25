@@ -14,9 +14,20 @@ def home():
 
 @app.route("/createworkout", methods=["GET", "POST"])
 def createworkout():
+    # This if statement will be hit if someone has created an exercise and that should be shown on the createworkout page
+    # so the user can create more exercises
+    if(request.method == 'POST'):
+        req_form = request.form
+        keys = req_form.getlist(0)
+        values = req_form.getlist(1)
+        d = dict()
+        for i in range(len(keys)):
+            d[keys[i]] = values[i]
+
+        print("Dictionary created: {}".format(d))
     return render_template("createworkout.html")
 
-@app.route("/createexercise", methods=["GET"])
+@app.route("/createexercise", methods=["GET", "POST"])
 def createexercise():
     return render_template("createexercise.html")
 
