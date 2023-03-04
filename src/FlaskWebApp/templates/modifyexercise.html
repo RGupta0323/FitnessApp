@@ -36,6 +36,7 @@ var weight = 'set'+i.toString()+'weight';
 var reps = 'set'+i.toString()+'reps';
   html = `<div class='set' id='${div_id}'>
                 <h1> Set '${i}' </h1> <br>
+                Exercise: <input type="text" value="{{ exercise }}" name="exercise">
                 Weight: <input type='text' name='${weight}'>
                 Reps: <input type="text" name='${reps}'> </div>`
 
@@ -49,6 +50,7 @@ var reps = 'set'+i.toString()+'reps';
         <form action="http://127.0.0.1:5000/createworkout" method="POST">
             <div class="set" id="set1">
                 <h1>Set 1: </h1>
+                Exercise: <input type="text" value="{{ exercise }}" name="exercise">
                 Weight: <input type="text" name="set1weight">
                 Reps: <input type="text" name="set1reps">
             </div>
