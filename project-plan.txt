@@ -1,0 +1,25 @@
+
+Current thing(s) to work on:
+- When Users are trying to create a workout, and they add an exercise. Then they try to add another one.
+In the table that's displayed in the UI, that exercise is overriden.
+I want the user to see the entire workout that they're building
+Then once they're done they click "done" and that workout is created.
+    - THings to do:
+        - Login & Register feature
+        - query dynamodb to see if the user has any workouts created
+        - make sure that anytime an exercise is created it goes to dynamo (and then it goes to teh UI)
+        -
+
+- Login & Register feature (this is for the previous item, because that data will be saved in a dynamo db)
+    - Things to do:
+        - For this feature, implement it yourself if the user wants to manually register and login using an email address
+        & a password
+
+        - Implement cognito if they want to "Sign using Google" or "sign Using Facebook"
+
+
+Things/Features to do:
+- CRUD for workouts
+    - Users should be able to view workouts
+    - Users should be able to create a workout and view it
+    -
