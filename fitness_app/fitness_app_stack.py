@@ -19,14 +19,15 @@ class FitnessAppStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
-        flask_lambda = _lambda.Function(self, "FlaskHandler", runtime=_lambda.Runtime.PYTHON_3_7,
+        flask_lambda = _lambda.Function(self, id="FlaskHandler", function_name="FitnessApp_FlaskHandler",
+                                        runtime=_lambda.Runtime.PYTHON_3_7,
                                         code=_lambda.Code.from_asset("src"), handler="flask_lambda.handler")
 
-        dynamo_lambda = _lambda.Function(self, id="DynamoLambda", runtime=_lambda.Runtime.PYTHON_3_7,
+        dynamo_lambda = _lambda.Function(self, id="DynamoLambda", function_name="FitnessApp_DynamoLambda", runtime=_lambda.Runtime.PYTHON_3_7,
                                                        code=_lambda.Code.from_asset("src"),
                                                        handler="dynamo_lambda.handler")
 
-        register_lambda = _lambda.Function(self, id="register_lambda", function_name="FitnessAppRegisterLambda",
+        register_lambda = _lambda.Function(self, id="register_lambda", function_name="FitnessApp_RegisterLambda",
                                            runtime=_lambda.Runtime.PYTHON_3_7,
                                            code=_lambda.Code.from_asset("src"),
                                            handler="register_lambda.handler")
