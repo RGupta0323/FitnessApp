@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 import serverless_wsgi
 import boto3
 from src.FlaskWebApp.cognito_utils import create_user, sign_up_user
+import json
 
 app = Flask(__name__)
 @app.route("/")
@@ -72,12 +73,16 @@ def register():
         event={"fname": fname, "lname": lname, "email":email, "password":password}
         print("event: {}".format(event))
 
-        # using cognito to create user, & sign in user
-        client = boto3.client('cognito-idp', region_name="us-east-1")
-        cognito_user_pool_id = "us-east-1_DH6Sb4sSO"
-        # response = create_user(client, cognito_user_pool_id, email)
-        # print(response)
-        sign_up_user(client, ClientID="3hui7kpemv308dfnnfmon81hi2", username=email, password=password)
+        # call register_lambda using boto3
+        try:
+            lambda_client = boto3.client("lambda")
+            lambda_client.invoke(
+                FunctionName="",
+                Payload=json.dumps(event)
+            )
+
+        except Exception as ex:
+            print("[app.py /register endpoint while involking register lambda] Exception: {}".format(ex))
 
         print("line 32 - successful!")
 

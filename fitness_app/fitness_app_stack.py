@@ -26,6 +26,10 @@ class FitnessAppStack(Stack):
                                                        code=_lambda.Code.from_asset("src"),
                                                        handler="dynamo_lambda.handler")
 
+        register_lambda = _lambda.Function(self, id="register_lambda", runtime=_lambda.Runtime.PYTHON_3_7,
+                                           code=_lambda.Code.from_asset("src"),
+                                           handler="register_lambda.handler")
+
 
 
         # lightsail instance - for hosting web app

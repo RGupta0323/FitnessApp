@@ -19,7 +19,43 @@ Then once they're done they click "done" and that workout is created.
 
 
 Things/Features to do:
+- When they create a workout, it should be created in dynamodb
 - CRUD for workouts
     - Users should be able to view workouts
     - Users should be able to create a workout and view it
-    -
+    - Users should be able to rename the workout
+    - Users should be able to edit a workout
+
+-----------------------------------------------------------------------------------------------------------------------
+Login & Register Feature
+- Create a python file called dynamo_utils.py
+Functions to do anything dynamodb related
+
+Ideas (Brainstorm):
+1) Create a lambda function to handle all dyanmodb related functions
+So you'd send a request to the lambda and it would handle the dyanmo operations
+
+2) Create a python file calle dyanmod_utils.py and handle all dynamo logic within the flask app /instance itself and use boto3
+
+3) Use a lambda for every function. So for register would be a lambda, you'd call that and that would ideally to do all
+the dynamo stuff and then the user is registered and you move on
+
+
+NOtes
+- You might have issues calling a lambda to handle situations for you.
+
+- Might be easier to handle things at the instance level?
+
+- MOre code in the instance level...
+
+- You'd still need dyanmo code in the instance when you're doing CRUD stuff or you outsource all of that to a lambda
+    - That means you have ONE lambda handling all dynamodb logic
+
+More thoughts
+1) You have one lambda doing all the operations.
+So you have one lambda doing ALL dyanmodb stuff
+
+2) You have lambdas handling other options - like register, login.
+Those lambdas would draw out a dynamod_utils.py and use functions from those to facilitate.
+Then you have instances in your code where the user is editing workouts, deleting them, starting a workout, doing stuff.
+Then they can draw from that file called dynamo_utils.py

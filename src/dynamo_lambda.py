@@ -4,7 +4,18 @@ import json
 import boto3
 from boto3.dynamodb.conditions import Key
 
+'''
+This lambda function is to handle all operations for dynamodb 
+'''
 def handler(event, context):
+    print("dyanamodb lambda is triggered")
+
+
+    pass
+
+
+# oldhandler function
+def handler2(event, context):
     headers = {"Content-Type": "application/json",
                         'Access-Control-Allow-Headers': 'Content-Type',
                         'Access-Control-Allow-Methods': 'OPTIONS,POST,GET',
