@@ -27,6 +27,9 @@ jobs:
       - name: Install python dev dependencies
         run: pip install --target ./src -r requirements-dev.txt
 
+      - name: Install python dev dependencies (For flask lambda)
+        run: pip install --target.src/FlaskWebApp -r requirements-dev.txt
+
       - name: Install python infrastructure dependencies
         run: pip install -r requirements-infra.txt
 
