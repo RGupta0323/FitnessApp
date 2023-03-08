@@ -115,6 +115,7 @@ def create_new_user(event):
                 "password":password
             }
         )
+        return response
 
     except Exception as ex:
         return ex
