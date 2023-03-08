@@ -26,6 +26,17 @@ Things/Features to do:
     - Users should be able to rename the workout
     - Users should be able to edit a workout
 
+- Future AWS stuff
+    - This will be hosted on a super small ec2 instance or a lightsail instance (this isn't necessary if you're running it
+    directly from the lambda itself)
+        - Doing this allows yout ocustomize the storage and stuff
+    - Create VPC for this to be in? (shows knowledge of networking aws concepts - vpc, route table, subnets, etc) ( (this isn't necessary if you're running it
+    directly from the lambda itself)
+        - regarding this you can put everything in a private subnet, and put a load balancer in the vpc and then the load
+        balancer can hit the instances directly so its super secure.
+
+    - YOu can containerize this app using ecs? (super optional)
+
 -----------------------------------------------------------------------------------------------------------------------
 Login & Register Feature
 - Create a python file called dynamo_utils.py
