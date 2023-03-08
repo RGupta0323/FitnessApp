@@ -75,9 +75,9 @@ def register():
 
         # call register_lambda using boto3
         try:
-            lambda_client = boto3.client("lambda")
+            lambda_client = boto3.client("lambda", region_name="us-east-1")
             lambda_client.invoke(
-                FunctionName="",
+                FunctionName="FitnessApp_RegisterLambda",
                 Payload=json.dumps(event)
             )
 

@@ -25,6 +25,7 @@ def handler(event, context):
     print("Event: {}".format(event))
 
 
+
 def handler2(event, context):
     print("register_lambda handler called")
     html = get_contents_s3_obj(bucket_name="fitness-app-dev-stack-fitnessappstaticwebfiles659-1c9bv2im68wv0",
