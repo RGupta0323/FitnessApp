@@ -3,6 +3,7 @@ import serverless_wsgi
 import boto3
 from src.FlaskWebApp.cognito_utils import create_user, sign_up_user
 import json
+from src import register_lambda
 
 app = Flask(__name__)
 @app.route("/")
@@ -75,17 +76,12 @@ def register():
 
         # call register_lambda using boto3
         try:
-            boto_session = boto3.Session(profile_name="dev")
-            lambda_client = boto_session.client("lambda", region_name="us-east-1")
-            lambda_client.invoke(
-                FunctionName="FitnessApp_RegisterLambda",
-                Payload=json.dumps(event)
-            )
+            register_lambda.handler(event, None)
 
         except Exception as ex:
             print("[app.py /register endpoint while involking register lambda] Exception: {}".format(ex))
 
-        print("line 32 - successful!")
+
 
         # check if successful
 

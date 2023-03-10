@@ -1,7 +1,7 @@
 import os
 import sys
 from jinja2 import Environment, FileSystemLoader
-from lambda_utils import get_contents_s3_obj, get_all_items_from_dynamodb_table
+from src.lambda_utils import get_contents_s3_obj, get_all_items_from_dynamodb_table
 import re
 import boto3
 
@@ -27,9 +27,12 @@ def handler(event, context):
     print("Event: {}".format(event))
 
     # Need to validate email address & password
-    if(not validate_email(event["email"]) or  not validate_password(event["password"])):
+    print(validate_email(event["email"]))
+    print(validate_password(event["password"]))
+    if(validate_email(event["email"]) == False or  validate_password(event["password"]) == False):
         return {"statuscode": 400, "body":"Error ocured. Input event doesn't have a valid email or password. Event: {}".format(event)}
 
+    print("email and password validated")
     # Query dyanmo to make sure that it doesn't exist
     if(not validate_new_user(event["email"])):
         return {"statuscode": 400, "body":"Error occured. Email isn't valid. User email: {}".format(event["email"])}
@@ -38,6 +41,7 @@ def handler(event, context):
     # re-directed to login page
 
     create_new_user(event)
+    print("register lambda successful!")
 
 
 
