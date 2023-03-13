@@ -1,9 +1,7 @@
 from flask import Flask, render_template, request
 import serverless_wsgi
 import boto3
-from src.FlaskWebApp.cognito_utils import create_user, sign_up_user
 import json
-from src import register_lambda
 
 app = Flask(__name__)
 @app.route("/")
@@ -75,11 +73,6 @@ def register():
         print("event: {}".format(event))
 
         # call register_lambda using boto3
-        try:
-            register_lambda.handler(event, None)
-
-        except Exception as ex:
-            print("[app.py /register endpoint while involking register lambda] Exception: {}".format(ex))
 
 
 

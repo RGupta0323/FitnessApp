@@ -17,6 +17,7 @@ def get_all_items_from_dynamodb_table(table_name):
         client = boto3.resource("dynamodb", region_name="us-east-1")
         table = client.Table(table_name)
         response = table.scan()
+        print("response: {}".format(response))
         return response["Items"]
 
     except Exception as ex:
