@@ -10,7 +10,8 @@ from aws_cdk import (
     aws_s3 as s3,
     aws_dynamodb as dynamodb,
     aws_cognito as cognito,
-    RemovalPolicy
+    RemovalPolicy,
+    aws_lightsail as lightsail
 )
 
 
@@ -35,57 +36,18 @@ class FitnessAppStack(Stack):
 
 
         # lightsail instance - for hosting web app
+        web_instance = lightsail.CfnInstance(
+            self, "FitnessAppLightSailInstance",
+            blueprint_id="",
+            bundle_id="",
+            instance_name="FitnessAppLightSailInstance",
+            hardware=None,
+            user_data=""
+
+
+        )
 
         # route53 - domain name stuff to give cognito
-        # cognito - for user auth
-        cognito_user_pool = cognito.UserPool(self, "Fitness-App-User-Pool",
-                                             user_pool_name="Fitness-App-User-Pool",
-                                             sign_in_aliases=cognito.SignInAliases(
-                                                 email=True
-                                             ),
-                                             self_sign_up_enabled=True,
-                                             auto_verify=cognito.AutoVerifiedAttrs(
-                                                 email=True
-                                                 # This is True by default if email is defined in SignInAliases
-                                             ),
-                                             user_verification=cognito.UserVerificationConfig(
-                                                 email_subject="You need to verify your email",
-                                                 email_body="Thanks for signing up.  Please click on this link to verify your account {##Verify Email##}",
-                                                 # This placeholder is a must if code is selected as preferred verification method
-                                                 email_style=cognito.VerificationEmailStyle.LINK
-
-                                             ),
-                                             standard_attributes=cognito.StandardAttributes(
-                                                 fullname=cognito.StandardAttribute(
-                                                     required=False,
-                                                     mutable=True,
-                                                 )
-                                             ),
-                                             custom_attributes={
-                                                 "tenant_id": cognito.StringAttribute(min_len=10, max_len=15,
-                                                                                      mutable=False),
-                                                 "created_at": cognito.DateTimeAttribute(),
-                                                 "employee_id": cognito.NumberAttribute(min=1, max=100, mutable=False),
-                                                 "is_admin": cognito.BooleanAttribute(mutable=True),
-                                             },
-                                             password_policy=cognito.PasswordPolicy(
-                                                 min_length=8,
-                                                 require_lowercase=True,
-                                                 require_uppercase=True,
-                                                 require_digits=True,
-                                                 require_symbols=True
-                                             ),
-                                             account_recovery=cognito.AccountRecovery.EMAIL_ONLY,
-                                             removal_policy=RemovalPolicy.DESTROY
-                                             )
-
-        app_client = cognito_user_pool.add_client(
-            "fitness-app-client",
-            user_pool_client_name="awesome-app-client",
-            auth_flows=cognito.AuthFlow(
-                user_password=True
-            )
-        )
 
 
         # dynamodb table for user data - this contains First Name, Last Name, Email, & Passwords
