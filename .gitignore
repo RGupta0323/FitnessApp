@@ -9,7 +9,7 @@ __pycache__/
 *$py.class
 
 # Environments
-.env
+src/FlaskWebApp/.env
 .venv
 env/
 venv/

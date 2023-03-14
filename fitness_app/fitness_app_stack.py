@@ -36,16 +36,16 @@ class FitnessAppStack(Stack):
 
 
         # lightsail instance - for hosting web app
+        """
         web_instance = lightsail.CfnInstance(
             self, "FitnessAppLightSailInstance",
-            blueprint_id="",
-            bundle_id="",
+            blueprint_id="amazon_linux",
+            bundle_id="nano_2_0",
             instance_name="FitnessAppLightSailInstance",
-            hardware=None,
             user_data=""
 
 
-        )
+        ) """
 
         # route53 - domain name stuff to give cognito
 
