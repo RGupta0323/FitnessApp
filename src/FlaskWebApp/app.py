@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 import serverless_wsgi
 import boto3
 import json
+from src import register_lambda
 
 app = Flask(__name__)
 @app.route("/")
@@ -72,7 +73,9 @@ def register():
         event={"fname": fname, "lname": lname, "email":email, "password":password}
         print("event: {}".format(event))
 
-        # call register_lambda using boto3
+        # call register_lambda
+        print("calling register lambda")
+        register_lambda.handler(event=event, context=None)
 
 
 
