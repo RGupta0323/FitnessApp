@@ -44,6 +44,9 @@ jobs:
       - name: Install web depencies for lambda
         run: npm install xhr2
 
+      - name: Installing apache server dependencies
+        run: pip install -U --no-cache-dir -v -v -v mod_wsgi-standalone
+
       - name: Configure AWS Credentials (Raw ACcount)
         uses: aws-actions/configure-aws-credentials@v1
         with:
