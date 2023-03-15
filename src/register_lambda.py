@@ -27,14 +27,12 @@ def handler(event, context):
     print("Event: {}".format(event))
 
     # Need to validate email address & password
-    print(validate_email(event["email"]))
-    print(validate_password(event["password"]))
     if(validate_email(event["email"]) == False or  validate_password(event["password"]) == False):
         return {"statuscode": 400, "body":"Error ocured. Input event doesn't have a valid email or password. Event: {}".format(event)}
 
     print("email and password validated")
     # Query dyanmo to make sure that it doesn't exist
-    if(not validate_new_user(event["email"])):
+    if(validate_new_user(event["email"]) == False ):
         return {"statuscode": 400, "body":"Error occured. Email isn't valid. User email: {}".format(event["email"])}
 
     # if all checks pass, insert it into dynamodb; at this point the lambda function ends and the /register endpoint is
@@ -94,15 +92,17 @@ def validate_new_user(email):
     dynamodb_client = boto3.client("dynamodb", region_name="us-east-1")
     response = dynamodb_client.query(
         TableName='fitness-app-dev-stack-FitnessAppUserData5D9F0F31-YQPUN4XKQ00I',
-        KeyConditionExpression='email = :email',
+        KeyConditionExpression='email = :email AND id = :id',
         ExpressionAttributeValues={
-            ':email': {'S': '{}'.format(email)}
+            ':email': {'S': '{}'.format(email)},
+            ':id': {"S": ""}
         }
     )
     print(response)
     return response!=None
 
 def create_new_user(event):
+    print("[register_lambda line 104] create_new_user() entered")
     fname,lname,email,password = event["fname"], event["lname"], event["email"], event["password"]
     try:
         # get the latest id from the dynamo table so you can increment it

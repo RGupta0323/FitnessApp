@@ -1,5 +1,6 @@
 import boto3, json
-def register_lambda():
+from src import register_lambda
+def test_register_lambda():
     session = boto3.Session()
     client = session.client("lambda", region_name="us-east-1")
     client.invoke(
@@ -7,4 +8,12 @@ def register_lambda():
         Payload=json.dumps({"fname":"test_name", "lname":"test_lname", "email":"someone@example.com", "password":"asdfjkl;"})
     )
 
-print(register_lambda())
+def test_create_new_user():
+    event = {"fname":"test_name", "lname":"test_lname", "email":"someone@example.com", "password":"asdfjkl;"}
+    assert register_lambda.create_new_user(event) != None
+
+def test_validate_new_user():
+    event = {"fname":"test_name", "lname":"test_lname", "email":"someone@example.com", "password":"asdfjkl;"}
+    assert register_lambda.validate_new_user(event["email"]) != None
+
+print(test_validate_new_user())

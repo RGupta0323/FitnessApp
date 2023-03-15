@@ -54,7 +54,7 @@ class FitnessAppStack(Stack):
         # This is to be used to login users in and to register users
         # partition key is to be a randomly generated string id (this will tie users to other dynamodb tables with fitness data)
         user_data_table = dynamodb.Table(self, "FitnessAppUserData",
-                               partition_key=dynamodb.Attribute(name="id", type=dynamodb.AttributeType.STRING),
+                               partition_key=dynamodb.Attribute(name="email", type=dynamodb.AttributeType.STRING),
                                encryption=dynamodb.TableEncryption.AWS_MANAGED
                                )
 
