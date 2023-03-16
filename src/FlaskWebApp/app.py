@@ -75,13 +75,15 @@ def register():
 
         # call register_lambda
         print("calling register lambda")
-        register_lambda.handler(event=event, context=None)
+        response = register_lambda.handler(event=event, context=None)
 
-
-
-        # check if successful
+        if (response == None):
+            # render failure notificaiton - notify user on teh webpage that the email is invalid or there was an error
+            # registering him/her in the database
+            pass
 
         # re-direct to login page
+        return render_template("login.html", event=event)
 
 
 

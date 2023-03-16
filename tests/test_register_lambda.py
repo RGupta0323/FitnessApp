@@ -14,6 +14,7 @@ def test_create_new_user():
 
 def test_validate_new_user():
     event = {"fname":"test_name", "lname":"test_lname", "email":"someone@example.com", "password":"asdfjkl;"}
-    assert register_lambda.validate_new_user(event["email"]) != None
+    response = register_lambda.validate_new_user(event["email"])
+    assert response == True
 
-print(test_validate_new_user())
+#print(test_validate_new_user())

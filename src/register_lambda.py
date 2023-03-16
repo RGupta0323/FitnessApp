@@ -33,30 +33,15 @@ def handler(event, context):
     print("email and password validated")
     # Query dyanmo to make sure that it doesn't exist
     if(validate_new_user(event["email"]) == False ):
+        # display an image on teh web UI that notifies the user that the email isnt' valid.
         return {"statuscode": 400, "body":"Error occured. Email isn't valid. User email: {}".format(event["email"])}
 
     # if all checks pass, insert it into dynamodb; at this point the lambda function ends and the /register endpoint is
     # re-directed to login page
 
+    print("create new user")
     create_new_user(event)
     print("register lambda successful!")
-
-
-
-
-
-def handler2(event, context):
-    print("register_lambda handler called")
-    html = get_contents_s3_obj(bucket_name="fitness-app-dev-stack-fitnessappstaticwebfiles659-1c9bv2im68wv0",
-                               object_key="register.html")
-    return {
-        'statusCode': 200,
-        'headers': {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "text/html"
-        },
-        'body': html.decode()
-    }
 
 
 def validate_email(email):
@@ -91,25 +76,24 @@ def validate_password(password):
 def validate_new_user(email):
     dynamodb_client = boto3.client("dynamodb", region_name="us-east-1")
     response = dynamodb_client.query(
-        TableName='fitness-app-dev-stack-FitnessAppUserData5D9F0F31-YQPUN4XKQ00I',
-        KeyConditionExpression='email = :email AND id = :id',
+        TableName='fitness-app-dev-stack-FitnessAppUserData5D9F0F31-LF1ZCEL9ATRW',
+        KeyConditionExpression='email = :email',
         ExpressionAttributeValues={
             ':email': {'S': '{}'.format(email)},
-            ':id': {"S": ""}
         }
     )
     print(response)
-    return response!=None
+    if(response["ResponseMetadata"]["HTTPStatusCode"] == 200):
+        return True
+    return False
 
 def create_new_user(event):
-    print("[register_lambda line 104] create_new_user() entered")
+    print("[register_lambda create_new_user() line 104] create_new_user() entered")
     fname,lname,email,password = event["fname"], event["lname"], event["email"], event["password"]
     try:
         # get the latest id from the dynamo table so you can increment it
-        table_name = "fitness-app-dev-stack-FitnessAppUserData5D9F0F31-YQPUN4XKQ00I"
-        data = get_all_items_from_dynamodb_table(table_name)
-        print(data)
-        dynamodb = boto3.resource('dynamodb')
+        table_name = "fitness-app-dev-stack-FitnessAppUserData5D9F0F31-LF1ZCEL9ATRW"
+        dynamodb = boto3.resource('dynamodb', region_name="us-east-1")
         table = dynamodb.Table(table_name)
         response = table.put_item(
             Item={
@@ -119,7 +103,9 @@ def create_new_user(event):
                 "password":password
             }
         )
+        print("[register_lambda.py create_new_user() line 108] Finished putting dynamodb. Response: {}".format(response))
         return response
 
     except Exception as ex:
-        return ex
+        print("[register_lambda.py create_new_user() line 110] Error occured. Exception message: {}".format(ex))
+        return None
