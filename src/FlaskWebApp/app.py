@@ -62,32 +62,42 @@ def modifyexercise(exercise):
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
-    if request.method == "POST":
-        print("line 11 - inside /register")
-        fname = request.form.get("fname")
-        print(fname)
-        # getting input with name = lname in HTML form
-        lname = request.form.get("lname")
-        email = request.form.get("email")
-        password = request.form.get("password")
-        event={"fname": fname, "lname": lname, "email":email, "password":password}
-        print("event: {}".format(event))
+        if request.method == "POST":
+            print("[app.py /register register() line 66] inside /register")
+            fname = request.form.get("fname")
+            print(fname)
+            # getting input with name = lname in HTML form
+            lname = request.form.get("lname")
+            email = request.form.get("email")
+            password = request.form.get("password")
+            event={"fname": fname, "lname": lname, "email":email, "password":password}
+            print("event: {}".format(event))
 
-        # call register_lambda
-        print("calling register lambda")
-        response = register_lambda.handler(event=event, context=None)
+            # call register_lambda
+            print("calling register lambda")
+            response = register_lambda.handler(event=event, context=None)
 
-        if (response == None):
-            # render failure notificaiton - notify user on teh webpage that the email is invalid or there was an error
-            # registering him/her in the database
-            pass
+            if(type(response) == dict and "statuscode" in response.keys() and response["statuscode"] == 400):
+                print("[app.py /register line 81] user email and/or password is invalid")
+                if(response["type"] == "email"):
+                    error_message = "Email {} is invalid. Please use a valid email".format(email)
+                    return render_template("register.html", error_message=error_message)
+                elif (response["type"] == "password"):
+                    error_message = '''Password is invalid. Please make sure the password meets the following requirements. \n 
+                     Should have at least one number. \n
+                    Should have at least one uppercase and one lowercase character. \n
+                    Should have at least one special symbol. \n
+                    Should be between 6 to 20 characters long.
+                    '''
 
-        # re-direct to login page
-        return render_template("login.html", event=event)
+                    return render_template("register.html", error_message=error_message)
+
+            # re-direct to login page
+            return render_template("login.html", event=event)
 
 
 
-    return render_template("register.html")
+        return render_template("register.html")
 
 def handler(event, context):
     return serverless_wsgi.handle_request(app, event, context)

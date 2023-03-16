@@ -28,7 +28,11 @@ def handler(event, context):
 
     # Need to validate email address & password
     if(validate_email(event["email"]) == False or  validate_password(event["password"]) == False):
-        return {"statuscode": 400, "body":"Error ocured. Input event doesn't have a valid email or password. Event: {}".format(event)}
+        return {"statuscode": 400, "type":"email", "body":"Error ocured. Input event doesn't have a valid email or password. Event: {}".format(event)}
+
+    if(validate_password(event["password"]) == False):
+        return {"statuscode": 400, "type": "password",
+                "body": "Error ocured. Input event doesn't have a valid password. Event: {}".format(event)}
 
     print("email and password validated")
     # Query dyanmo to make sure that it doesn't exist
