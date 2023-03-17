@@ -13,6 +13,7 @@ They are able to create individual workouts, organize them,
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/Home.css') }}">
     <script type="text/javascript" src="{{url_for('static', filename='Home.js')}}"></script>
     <!-- Existing workouts can exist here with a folder structure (user can navigate -->
+    <h1>Welcome user: {{ event["fname"] }} </h1>
     <div class="app" id="app">
 
     </div>
@@ -21,6 +22,10 @@ They are able to create individual workouts, organize them,
          <a href="{{ url_for('createworkout') }}">Create a Workout</a>
      </button>
 
+    <h1> Your workouts: </h1>
+    <div id="workouts">
+
+    </div>
     <script>
         const app = document.getElementById("app");
 

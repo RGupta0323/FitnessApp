@@ -5,6 +5,10 @@ import json
 from src import register_lambda
 
 app = Flask(__name__)
+
+# User login info (if logged in )
+logged_in = False
+user_event_info = None
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -60,6 +64,20 @@ def modifyexercise(exercise):
     exercise = exercise_dict[exercise]
     return render_template("modifyexercise.html", exercise=exercise)
 
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        # This is hwere the user puts in email address & password and logs in
+        print("[app.py /register login() line 71] inside login() for POST request")
+        email, password = request.form.get("email"), request.form.get("password")
+        event = {"email":email, "password":password}
+        print("[app.py /register login() line 73] event: {}".format(event))
+
+        print("calling login lambda")
+
+        # Verify that teh user email and password
+    return render_template("login.html")
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
         if request.method == "POST":
@@ -93,7 +111,7 @@ def register():
                     return render_template("register.html", error_message=error_message)
 
             # re-direct to login page
-            return render_template("login.html", event=event)
+            return render_template("Home.html", event=event)
 
 
 

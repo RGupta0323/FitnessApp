@@ -40,9 +40,7 @@ def handler(event, context):
         # display an image on teh web UI that notifies the user that the email isnt' valid.
         return {"statuscode": 400, "body":"Error occured. Email isn't valid. User email: {}".format(event["email"])}
 
-    # if all checks pass, insert it into dynamodb; at this point the lambda function ends and the /register endpoint is
-    # re-directed to login page
-
+    # if all checks pass, insert it into dynamodb; at this point the lambda function ends and the /register endpoint
     print("create new user")
     create_new_user(event)
     print("register lambda successful!")
