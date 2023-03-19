@@ -16,6 +16,11 @@
         <input type="submit" onClick = "submit_data()"  value="Submit">
         -->
      </form>
+    {% if error_message %}
+    <div class="alert alert-danger" role="alert">
+        {{ error_message }}
+    </div>
+    {% endif %}
     <h1>Your workouts: </h1>
 
     <a href="{{ url_for('createworkout') }}">Create a Workout</a>

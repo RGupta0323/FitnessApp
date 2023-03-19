@@ -3,12 +3,16 @@ import serverless_wsgi
 import boto3
 import json
 from src import register_lambda
+from src import login_lambda
+from User import User
 
 app = Flask(__name__)
 
 # User login info (if logged in )
 logged_in = False
 user_event_info = None
+global user
+
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -74,6 +78,14 @@ def login():
         print("[app.py /register login() line 73] event: {}".format(event))
 
         print("calling login lambda")
+        res = login_lambda.handler(event, context=None)
+        if( res["statuscode"] == 200):
+            login_user(event)
+            return render_template("Home.html", event = event)
+        else:
+            # notify user gets an error
+            error_message = "Error has occured while logging you in. "
+            return render_template("login.html", error_message=error_message)
 
         # Verify that teh user email and password
     return render_template("login.html")
@@ -116,6 +128,12 @@ def register():
 
 
         return render_template("register.html")
+
+# function to set variables to log in user
+def login_user(event):
+    print("[app.py login_user() line 131] login_user() function has been entered")
+    user = User(user_event_info=event)
+    print("[app.py login_user() line 135] User logged in")
 
 def handler(event, context):
     return serverless_wsgi.handle_request(app, event, context)
