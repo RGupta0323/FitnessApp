@@ -51,6 +51,8 @@ class FitnessAppStack(Stack):
         pip install gunicorn flask flask_bootstrap pandas numpy flask_WTF
         apt install pipenv
         pipenv shell
+        apt install python3-flask
+        pip install -U --no-cache-dir -v -v -v mod_wsgi-standalone
         """
         web_instance = lightsail.CfnInstance(
             self, "FitnessAppLightSailInstance",

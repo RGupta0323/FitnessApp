@@ -1,10 +1,8 @@
 from flask import Flask, render_template, request
 import serverless_wsgi
-import boto3
-import json
 from src import register_lambda
 from src import login_lambda
-from User import User
+import User
 
 app = Flask(__name__)
 
