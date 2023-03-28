@@ -30,7 +30,9 @@ class WorkoutTracker {
                     <tr>
                         <th>Workout Name</th>
                         <th>Tags</th>
-                        <th></th>
+                        <th>
+                        <button type="button"> </button>
+                        </th>
                     </tr>
                 </thead>
                 <tbody class="tracker__entries"></tbody>

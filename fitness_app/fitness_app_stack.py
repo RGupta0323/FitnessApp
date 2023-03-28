@@ -36,16 +36,13 @@ class FitnessAppStack(Stack):
 
 
         # lightsail instance - for hosting web app
-        """
         web_instance = lightsail.CfnInstance(
             self, "FitnessAppLightSailInstance",
             blueprint_id="amazon_linux",
             bundle_id="nano_2_0",
             instance_name="FitnessAppLightSailInstance",
             user_data=""
-
-
-        ) """
+        )
 
         # route53 - domain name stuff to give cognito
 
@@ -63,6 +60,10 @@ class FitnessAppStack(Stack):
             actions=["dynamodb:*"],
             resources=[str(user_data_table.table_arn)]
         ))
+
+        # containerize flask app & create ecs cluster from here.
+        # tie it into a load balancer in a private subnet
+        # (TODO LATER)
 
 
 

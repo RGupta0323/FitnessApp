@@ -27,11 +27,12 @@
                     </tr>
                 </thead>
                 <tbody>
-            {% for set_num in user_dict.keys()  %}
+                {% for ud in user_dict %}
+                 {% for set_num in ud.keys()  %}
                 <tr>
 
                     {% if set_num == 1 %}
-                     <th scope="row">{{ user_dict['exercise'] }}</th>
+                     <th scope="row">{{ ud['exercise'] }}</th>
                     {% endif %}
 
                     {% if set_num != 1 and set_num != 'exercise' %}
@@ -40,11 +41,11 @@
                     {% if set_num != 'exercise' %}
                     <td scope="col">{{ set_num }}</td>
                     {% endif %}
-                    {% for key in user_dict[set_num] %}
+                    {% for key in ud[set_num] %}
 
 
                     {% if set_num != 'exercise' %}
-                    <td scope="col">{{ user_dict[set_num][key] }}</td>
+                    <td scope="col">{{ ud[set_num][key] }}</td>
                     {% endif %}
 
 
@@ -56,11 +57,29 @@
 
             {% endfor %}
                 </tbody>
+                {% endfor %}
+
 
             </table>
         {% endif %}
         <button type="button">
             <a href="{{ url_for('createexercise') }}">Add Exercise</a>
+        </button>
+
+        <!-- When the user clicks the below button, then the workout will be created for the user.
+        It gets into a dynamodb table that has the user's fitness data
+        It gets re-directed to the homepage with that workout (the homepage gets it from dynamodb
+        Once at teh home page they can create another workout or they can just log the workout.
+
+        -->
+
+        <script>
+            function sendUserWorkout(){
+
+            }
+        </script>
+        <button onclick="sendUserWorkout()">
+            <a href="{{ url_for('usercreatesworkout') }}">Finish creating workout</a>
         </button>
 
 </body>

@@ -15,7 +15,15 @@ Then once they're done they click "done" and that workout is created.
         - For this feature, implement it yourself if the user wants to manually register and login using an email address
         & a password
 
-        - Implement cognito if they want to "Sign using Google" or "sign Using Facebook"
+        - Implement cognito if they want to "Sign using Google" or "sign Using Facebook" (TODO - LATER)
+
+
+CUrrent thing to work on (03/19/2023):
+- The user is now logged in / registered, and they are re-directed to teh home page
+When the user creates workouts, and creates exercises that stuff is in dynamodb or even stored in teh user object
+Then when they're done, then its stored in the dynamodb
+They should be able to view the workout, log it, create more ones, edit it, etc.
+- Also be able to create workouts based on previous workouts!
 
 
 Things/Features to do:

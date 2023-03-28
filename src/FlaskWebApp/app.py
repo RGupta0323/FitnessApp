@@ -48,9 +48,20 @@ def createworkout():
 
         print("modified_dict: {}".format(modified_dict))
 
+        global user
+        # TODO
+        if user == None:
+            # display a message to tell teh user to login and then re-directs them to the login page
+            error_message = "User must be logged in to create a workout"
+            return render_template()
+        user.add_workout(modified_dict) # adding new workout to global user object
+
 
         # Now this dictionary will go back to createworkout.html, displaying the created exercise.
-        return render_template("createworkout.html", user_dict = modified_dict)
+        print("[app.py create_workout() line 55] User workouts to be rednered in createworkout.html. User workouts: {}".format(
+            user.workouts
+        ))
+        return render_template("createworkout.html", user_dict = user.workouts)
 
 
 
@@ -128,12 +139,23 @@ def register():
 
 
         return render_template("register.html")
+@app.route("/usercreatesworkout", methods=["GET", "POST"])
+def usercreatesworkout(workout):
+    print("[app.py usercreateworkout line 138] user workout: {}".format(workout))
+    # When the user clicks the below button, then the workout will be created for the user.
+    #         It gets into a dynamodb table that has the user's fitness data
+    #         It gets re-directed to the homepage with that workout (the homepage gets it from dynamodb
+    #         Once at teh home page they can create another workout or they can just log the workout.
+    return render_template("Home.html", workout=workout)
+
 
 # function to set variables to log in user
 def login_user(event):
     print("[app.py login_user() line 131] login_user() function has been entered")
+    global user
     user = User(user_event_info=event)
-    print("[app.py login_user() line 135] User logged in")
+    print("[app.py login_user() line 139] User object event info: {}".format(user.event))
+    print("[app.py login_user() line 140] User logged in")
 
 def handler(event, context):
     return serverless_wsgi.handle_request(app, event, context)
