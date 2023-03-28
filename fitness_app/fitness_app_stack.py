@@ -38,7 +38,7 @@ class FitnessAppStack(Stack):
         # lightsail instance - for hosting web app
         web_instance = lightsail.CfnInstance(
             self, "FitnessAppLightSailInstance",
-            blueprint_id="amazon_linux",
+            blueprint_id="ubuntu_20_04",
             bundle_id="nano_2_0",
             instance_name="FitnessAppLightSailInstance",
             user_data=""
