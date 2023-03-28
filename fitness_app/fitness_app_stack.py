@@ -36,12 +36,28 @@ class FitnessAppStack(Stack):
 
 
         # lightsail instance - for hosting web app
+        user_data = """
+        sudo apt-get -y update
+        sudo apt-get -y install python3 python3-venv python3-dev
+        sudo apt-get -y install  nginx supervisor git
+        apt install binutils 
+        git clone https://github.com/RGupta0323/FitnessApp
+        cd FitnessApp
+        python3 -m venv venv 
+        source venv/bin/activate
+        pip install -r requirements.txt 
+        pip install -r requirements-dev.txt
+        pip install -r requirements-infra.txt 
+        pip install gunicorn flask flask_bootstrap pandas numpy flask_WTF
+        apt install pipenv
+        pipenv shell
+        """
         web_instance = lightsail.CfnInstance(
             self, "FitnessAppLightSailInstance",
             blueprint_id="ubuntu_20_04",
             bundle_id="nano_2_0",
             instance_name="FitnessAppLightSailInstance",
-            user_data=""
+            user_data=user_data
         )
 
         # route53 - domain name stuff to give cognito
