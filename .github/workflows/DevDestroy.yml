@@ -47,4 +47,4 @@ jobs:
         run: cdk synth fitness-app-dev-stack
 
       - name: cdk destroy
-        run: cdk destroy fitness-app-dev-stack --require-approval never
+        run: cdk destroy fitness-app-dev-stack --require-approval never --force
