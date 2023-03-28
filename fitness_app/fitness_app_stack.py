@@ -41,6 +41,7 @@ class FitnessAppStack(Stack):
         sudo apt-get -y install python3 python3-venv python3-dev
         sudo apt-get -y install  nginx supervisor git
         apt install binutils 
+        apt install python3-flask
         git clone https://github.com/RGupta0323/FitnessApp
         cd FitnessApp
         python3 -m venv venv 
@@ -61,6 +62,7 @@ class FitnessAppStack(Stack):
             instance_name="FitnessAppLightSailInstance",
             user_data=user_data
         )
+
 
         # route53 - domain name stuff to give cognito
 
