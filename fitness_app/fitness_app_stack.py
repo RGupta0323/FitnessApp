@@ -37,6 +37,7 @@ class FitnessAppStack(Stack):
 
         # lightsail instance - for hosting web app
         user_data = """
+        sudo su
         sudo apt-get -y update
         sudo apt-get -y install python3 python3-venv python3-dev
         sudo apt-get -y install  nginx supervisor git
@@ -56,14 +57,15 @@ class FitnessAppStack(Stack):
         pip install -U --no-cache-dir -v -v -v mod_wsgi-standalone
         """
 
-        """
+
         web_instance = lightsail.CfnInstance(
             self, "FitnessAppLightSailInstance",
             blueprint_id="ubuntu_20_04",
             bundle_id="nano_2_0",
             instance_name="FitnessAppLightSailInstance",
             user_data=user_data
-        )"""
+        )
+
 
 
         # route53 - domain name stuff to give cognito
