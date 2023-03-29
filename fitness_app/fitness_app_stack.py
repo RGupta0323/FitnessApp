@@ -22,7 +22,7 @@ class FitnessAppStack(Stack):
 
         flask_lambda = _lambda.Function(self, id="FlaskHandler", function_name="FitnessApp_FlaskHandler",
                                         runtime=_lambda.Runtime.PYTHON_3_7,
-                                        code=_lambda.Code.from_asset("src/FlaskWebApp"), handler="app.handler")
+                                        code=_lambda.Code.from_asset("src"), handler="app.handler")
 
         dynamo_lambda = _lambda.Function(self, id="DynamoLambda", function_name="FitnessApp_DynamoLambda", runtime=_lambda.Runtime.PYTHON_3_7,
                                                        code=_lambda.Code.from_asset("src"),
