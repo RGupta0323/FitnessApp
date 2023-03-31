@@ -57,7 +57,7 @@ class FitnessAppStack(Stack):
         pip install -U --no-cache-dir -v -v -v mod_wsgi-standalone
         """
 
-
+        """
         web_instance = lightsail.CfnInstance(
             self, "FitnessAppLightSailInstance",
             blueprint_id="ubuntu_20_04",
@@ -65,6 +65,7 @@ class FitnessAppStack(Stack):
             instance_name="FitnessAppLightSailInstance",
             user_data=user_data
         )
+        """
 
 
 

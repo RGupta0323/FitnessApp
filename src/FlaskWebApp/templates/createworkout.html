@@ -58,6 +58,10 @@
             {% endfor %}
                 </tbody>
                 {% endfor %}
+                 <button onclick="usercreatesworkout()">
+                     <input type = "submit" value = "Finish creating workout" />
+                </button>
+
 
 
             </table>
@@ -72,15 +76,12 @@
         Once at teh home page they can create another workout or they can just log the workout.
 
         -->
-
         <script>
-            function sendUserWorkout(){
-
+            function usercreatesworkout(){
+                console.log("[createworkout.html usercreatesworkout() line 81]
             }
         </script>
-        <button onclick="sendUserWorkout()">
-            <a href="{{ url_for('usercreatesworkout') }}">Finish creating workout</a>
-        </button>
+
 
 </body>
 </html>

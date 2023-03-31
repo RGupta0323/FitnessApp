@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 import serverless_wsgi
 from src import register_lambda
 from src import login_lambda
-import User
+from User import User
 
 app = Flask(__name__)
 
@@ -137,14 +137,18 @@ def register():
 
 
         return render_template("register.html")
+
 @app.route("/usercreatesworkout", methods=["GET", "POST"])
-def usercreatesworkout(workout):
-    print("[app.py usercreateworkout line 138] user workout: {}".format(workout))
+def usercreatesworkout():
+    req_form = request.form
+    print("[app.py usercreatesworkout() line 144] user_req_form: {}".format(req_form))
+    print("[app.py usercreatesworkout() line 145] user_req_form keys: {}".format(req_form.keys()))
+    # print("[app.py usercreateworkout line 138] user workout: {}".format())
     # When the user clicks the below button, then the workout will be created for the user.
     #         It gets into a dynamodb table that has the user's fitness data
     #         It gets re-directed to the homepage with that workout (the homepage gets it from dynamodb
     #         Once at teh home page they can create another workout or they can just log the workout.
-    return render_template("Home.html", workout=workout)
+   # return render_template("Home.html", workout=workout)
 
 
 # function to set variables to log in user
