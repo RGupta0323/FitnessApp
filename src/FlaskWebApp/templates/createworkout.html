@@ -7,6 +7,8 @@
     <!-- Boostrap CSS & JS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
 </head>
 <body>
         <h1>Webpage to create a workout</h1>
@@ -26,7 +28,7 @@
                         <th scope="col"># of Reps</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="userexercises">
                 {% for ud in user_dict %}
                  {% for set_num in ud.keys()  %}
                 <tr>
@@ -80,9 +82,26 @@
             function usercreatesworkout(){
                 console.log("[createworkout.html usercreatesworkout() line 81] Entered usercreatesworkout() function");
 
+                // send a request here with the form data to a endpoint that's going to do all the python stuff
+                var url = "http://127.0.0.1:5000/usercreatesworkout";
+                //for the body, get the entire the workouts that are in teh table for the user.
+
+                var body = $("tr"); //error is occuring here. This is not becoming a list
+
+                console.log("[createworkout.html usercreatesworkout() line 89] body: " + body);
+
+
+
+                for(let i=1; i<body.length; i++){
+                    console.log("[createworkout.html usercreatesworkout() line 91] i: " + i);
+                    var html = body[i].innerHTML;
+                    console.log("[createworkout.html usercreatesworkout() line 92] inner html of body: " + html);
+                }
+                //$.ajax();
+
+
             }
         </script>
-
 
 </body>
 </html>

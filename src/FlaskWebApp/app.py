@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, LoginForm, flash, redirect, abort, url_for, is_safe_url
+from flask import Flask, render_template, request
 import serverless_wsgi
 from src import register_lambda
 from src import login_lambda
@@ -6,6 +6,9 @@ from User import User
 from flask_login import LoginManager
 
 app = Flask(__name__)
+
+# flask config settings
+app.config["DynamoDB_ARN"] = "" # dynamodb arn
 
 # flask login manager
 login_manager = LoginManager()
@@ -78,28 +81,11 @@ def modifyexercise(exercise):
     exercise = exercise_dict[exercise]
     return render_template("modifyexercise.html", exercise=exercise)
 
-@app.route("/login", methods=["GET", "POST"])
-def login():
-    form = LoginForm()
-    if form.validate_on_submit():
-        # Login and validate the user.
-        # user should be an instance of your `User` class
-        login_user(user)
 
-        flash('Logged in successfully.')
-
-        next = request.args.get('next')
-        # is_safe_url should check if the url is safe for redirects.
-        # See http://flask.pocoo.org/snippets/62/ for an example.
-        if not is_safe_url(next):
-            return abort(400)
-
-        return redirect(next or url_for('index'))
-    return render_template('login.html', form=form)
 
 # this is the old login route
-@app.route("/loginold", methods=["GET", "POST"])
-def login_old():
+@app.route("/login", methods=["GET", "POST"])
+def login():
     if request.method == "POST":
         # This is hwere the user puts in email address & password and logs in
         print("[app.py /register login() line 71] inside login() for POST request")
@@ -180,9 +166,14 @@ def login_user(event):
     print("[app.py login_user() line 139] User object event info: {}".format(user.event))
     print("[app.py login_user() line 140] User logged in")
 
+# function to log out user
+def logout():
+    User.logged_in = False
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.get(user_id)
+
 
 def handler(event, context):
     return serverless_wsgi.handle_request(app, event, context)

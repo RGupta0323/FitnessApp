@@ -19,8 +19,7 @@ Then once they're done they click "done" and that workout is created.
 
 
 CUrrent thing to work on (03/19/2023):
-- There is a new library called flask-login (I say "new" lightly... I just found out that it existed)
-Implement that for login, this will help and make sure the user is logged in at all times.
+- implement feature to check if user is logged in (Forgot the flask-login library - its using sql and we're using dynamodb)
 
 
 Things/Features to do:
@@ -41,6 +40,9 @@ Things/Features to do:
         balancer can hit the instances directly so its super secure.
 
     - YOu can containerize this app using ecs? (super optional)
+
+- Future Stuff
+    - Create an automation suite with selenium web driver tests to test this app.
 
 -----------------------------------------------------------------------------------------------------------------------
 Login & Register Feature

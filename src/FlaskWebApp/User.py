@@ -16,3 +16,8 @@ class User:
 
         print("[User.py add_workout() line 17] Input workout verified! Adding workout, {}, to user workouts".format(workout))
         self.workouts.append(workout)
+
+    # function to check if a user is logged in
+    def logged_in(self):
+        # check if User has been logged in
+        return self.logged_in == True

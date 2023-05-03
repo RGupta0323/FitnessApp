@@ -1,14 +1,14 @@
 # syntax=docker/dockerfile:1
 
-FROM python:3.8-slim-buster
+FROM python
 
 WORKDIR /FitnessApp/
 
-COPY /FitnessApp .
+COPY requirements.txt .
+
+RUN pip install -r requirements.txt
 
 
+COPY src/ .
 
-COPY src/FlaskWebApp .
-COPY src .
-
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
+CMD [ "python", "./src/FlaskWebApp/app.py"]
