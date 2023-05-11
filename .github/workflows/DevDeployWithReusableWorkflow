@@ -1,11 +1,6 @@
 name: Dev Deploy
 
 on:
-  push:
-    branches:
-      - master
-      - main
-      - dev
   workflow_dispatch:
 
 jobs:
@@ -14,4 +9,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Call Reusable workflow
-        uses: RGupta0323/ReusableWorkflows/.github/workflows/DevDeploy.yml
+        uses: RGupta0323/ReusableWorkflows/.github/workflows/DevDeploy.yml@main
