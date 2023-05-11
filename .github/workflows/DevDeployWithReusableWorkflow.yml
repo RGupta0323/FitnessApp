@@ -9,4 +9,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Call Reusable workflow
-        uses: RGupta0323/ReusableWorkflows/.github/workflows/DevDeploy.yml@main
+        uses: RGupta0323/ReusableWorkflows/.github/workflows/DevDeploy.yml@master
