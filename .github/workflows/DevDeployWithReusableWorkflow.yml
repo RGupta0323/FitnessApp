@@ -6,7 +6,6 @@ on:
 jobs:
   build:
     environment: Dev
-    runs-on: ubuntu-latest
     build-ubuntu:
       name: Calling Reusable workflow
       uses: RGupta0323/ReusableWorkflows/.github/workflows/DevDeploy.yml@master
