@@ -4,10 +4,10 @@ on:
   workflow_dispatch:
 
 jobs:
-  uses: RGupta0323/ReusableWorkflows/.github/workflows/DevDeploy.yml@master
   build:
     environment: Dev
     runs-on: ubuntu-latest
     steps:
-      
+      - uses: RGupta0323/ReusableWorkflows/.github/workflows/DevDeploy.yml@master
+
 
