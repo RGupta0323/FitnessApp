@@ -10,7 +10,10 @@ jobs:
 
 
     steps:
-      - name: Test Step
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Calling Reusable Workflows
         uses: RGupta0323/ReusableWorkflows@main
 
 
