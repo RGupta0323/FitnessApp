@@ -7,7 +7,7 @@ jobs:
   build:
     environment: Dev
     runs-on: ubuntu-latest
-    steps:
+    checkout:
       - uses: RGupta0323/ReusableWorkflows/.github/workflows/DevDeploy.yml@master
 
 
