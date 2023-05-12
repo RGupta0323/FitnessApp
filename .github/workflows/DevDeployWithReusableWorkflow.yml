@@ -6,11 +6,9 @@ on:
 jobs:
   build:
     environment: Dev
-    build-ubuntu:
-      name: Calling Reusable workflow
-      uses: RGupta0323/ReusableWorkflows/.github/workflows/DevDeploy.yml@master
-      with:
-        runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
+    uses: RGupta0323/ReusableWorkflows/.github/workflows/DevDeploy.yml@master
+    
     steps:
       - name: Test Step
         run: actions/checkout@v2
