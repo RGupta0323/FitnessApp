@@ -11,6 +11,6 @@ jobs:
 
     steps:
       - name: Test Step
-        uses: RGupta0323/ReusableWorkflows@master
+        uses: RGupta0323/ReusableWorkflows@main
 
 
