@@ -6,10 +6,11 @@ on:
 jobs:
   build:
     uses: RGupta0323/ReusableWorkflows/.github/workflows/action.yml@main
-    environment: Dev
-    runs-on: ubuntu-latest
+    
 
   do-it:
+    environment: Dev
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
