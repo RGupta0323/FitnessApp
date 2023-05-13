@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    uses: RGupta0323/ReusableWorkflows@main
+    uses: RGupta0323/ReusableWorkflows/.github/workflows@main
     environment: Dev
     runs-on: ubuntu-latest
 
