@@ -10,6 +10,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16.3.0'
+
+      - name: install aws cdk
+        run: npm install -g aws-cdk
 
   call-resusableworkflow:
     uses: RGupta0323/ReusableWorkflows/.github/workflows/action.yml@main
