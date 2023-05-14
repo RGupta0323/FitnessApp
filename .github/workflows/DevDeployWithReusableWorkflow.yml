@@ -21,7 +21,6 @@ jobs:
 
   call-resusableworkflow:
     environment: Dev
-    runs-on: ubuntu-latest
     uses: RGupta0323/ReusableWorkflows/.github/workflows/action.yml@main
     #with:
       #aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
