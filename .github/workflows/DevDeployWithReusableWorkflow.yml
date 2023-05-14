@@ -4,19 +4,26 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    uses: RGupta0323/ReusableWorkflows/.github/workflows/action.yml@main
-    with:
-      aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY}}
-      aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      aws-region: us-east-1
-
-
-  do-it:
+  checkout-repo:
     environment: Dev
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
+  call-resusableworkflow:
+    uses: RGupta0323/ReusableWorkflows/.github/workflows/action.yml@main
+    with:
+      aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+      aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      aws-region: us-east-1
+
+
+  Deploy:
+    environment: Dev
+    runs-on: ubuntu-latest
+    steps:
+      - name: cdk synth
+        run: cdk synth fitness-app-dev-stack
 
 
