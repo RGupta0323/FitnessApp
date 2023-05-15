@@ -27,6 +27,7 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
   call-resusableworkflow:
+    needs: checkout-repo
     uses: RGupta0323/ReusableWorkflows/.github/workflows/action.yml@main
     #with:
       #aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
