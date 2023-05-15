@@ -31,8 +31,6 @@ jobs:
 
   call-reusableworkflow:
     needs: checkout-repo
-    runs-on: ubuntu-latest
-    environment: Dev
     uses: RGupta0323/ReusableWorkflows/.github/workflows/action.yml@main
     with:
       aws-access-key-id: ${{ env.aws-access-key-id }}
