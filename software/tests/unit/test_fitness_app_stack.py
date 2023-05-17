@@ -1,6 +1,6 @@
 import aws_cdk as core
 import aws_cdk.assertions as assertions
-from fitness_app.fitness_app_stack import FitnessAppStack
+from infra.fitness_app_stack import FitnessAppStack
 
 
 """def test_sqs_queue_created():

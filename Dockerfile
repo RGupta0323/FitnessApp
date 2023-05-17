@@ -9,6 +9,6 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 
-COPY src/ .
+COPY software/src/ .
 
 CMD [ "python", "./src/FlaskWebApp/app.py"]

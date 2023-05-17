@@ -1,7 +1,3 @@
-import os
-import sys
-from jinja2 import Environment, FileSystemLoader
-from src.lambda_utils import get_contents_s3_obj, get_all_items_from_dynamodb_table
 import re
 import boto3
 

@@ -1,5 +1,7 @@
 import boto3, json
-from src import register_lambda
+from software.src import register_lambda
+
+
 def test_register_lambda():
     session = boto3.Session()
     client = session.client("lambda", region_name="us-east-1")

@@ -25,13 +25,13 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Install python dev dependencies
-        run: pip install --target ./src -r requirements-dev.txt
+        run: pip install --target ./src -r ./software/requirements-dev.txt
 
       - name: Install python dev dependencies (For flask lambda)
-        run: pip install --target ./src/FlaskWebApp -r requirements-dev.txt
+        run: pip install --target ./software/src/FlaskWebApp -r ./software/requirements-dev.txt
 
       - name: Install python infrastructure dependencies
-        run: pip install -r requirements-infra.txt
+        run: pip install -r ./infra/requirements-infra.txt
 
       - name: Setup node
         uses: actions/setup-node@v1

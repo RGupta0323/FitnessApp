@@ -2,7 +2,7 @@
 
 import aws_cdk as cdk
 
-from fitness_app.fitness_app_stack import FitnessAppStack
+from infra.fitness_app_stack import FitnessAppStack
 
 
 app = cdk.App()

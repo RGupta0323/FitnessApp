@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 import serverless_wsgi
-from src import register_lambda
-from src import login_lambda
+from software.src import register_lambda
+from software.src import login_lambda
 from User import User
 from flask_login import LoginManager
 
